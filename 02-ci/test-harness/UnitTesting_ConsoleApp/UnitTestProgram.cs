@@ -209,7 +209,7 @@ namespace UnitTesting_ConsoleApp
 
                 Console.WriteLine("\nTEST 3: Tank1 outlet opens above zero");
                 await logixProject.SetTagValueBOOLAsync(tank1ValveInCmd, LogixProject.OperationMode.Online, false);
-                await logixProject.SetTagValueREALAsync(tank1Level, LogixProject.OperationMode.Online, 10.0f);
+                await logixProject.SetTagValueREALAsync(tank1Level, LogixProject.OperationMode.Online, 100.0f);
                 await logixProject.SetTagValueBOOLAsync(tank1ValveOutCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
                 bool t3 = await logixProject.GetTagValueBOOLAsync(tank1ValveOutStatus, LogixProject.OperationMode.Online);
@@ -241,7 +241,7 @@ namespace UnitTesting_ConsoleApp
 
                 Console.WriteLine("\nTEST 7: Tank2 outlet opens above zero");
                 await logixProject.SetTagValueBOOLAsync(tank2ValveInCmd, LogixProject.OperationMode.Online, false);
-                await logixProject.SetTagValueREALAsync(tank2Level, LogixProject.OperationMode.Online, 10.0f);
+                await logixProject.SetTagValueREALAsync(tank2Level, LogixProject.OperationMode.Online, 100.0f);
                 await logixProject.SetTagValueBOOLAsync(tank2ValveOutCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
                 bool t7 = await logixProject.GetTagValueBOOLAsync(tank2ValveOutStatus, LogixProject.OperationMode.Online);
