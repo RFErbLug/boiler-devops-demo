@@ -1,0 +1,23 @@
+# Visual Studio / IDE
+.vs/
+*.suo
+*.user
+
+# Build output
+**/bin/
+**/obj/
+
+# Debug / symbols / generated runtime files
+*.pdb
+*.cache
+*.deps.json
+*.runtimeconfig.json
+*.dll
+*.exe
+
+# Local notes / tree dumps
+repo-tree.txt
+my-repo-tree.txt
+
+# Backup files
+*.BAK
