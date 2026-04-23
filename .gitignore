@@ -21,3 +21,15 @@ my-repo-tree.txt
 
 # Backup files
 *.BAK
+
+# Studio 5000 / local working files
+*.SEM
+*.sem
+*.WRK
+*.wrk
+
+# Studio 5000 backup files
+*.BAK*
+*.bak*
+
+# Optional: if you see other local editor artifacts later, add them too
