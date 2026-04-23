@@ -30,8 +30,6 @@ pipeline {
         L5X_TO_ACD_SCRIPT   = '02-ci/pipeline-scripts/l5x-to-acd.ps1'
         RUN_TESTS_SCRIPT    = '02-ci/pipeline-scripts/run-ci-tests.ps1'
 
-        // External tool paths
-        // Replace these with full paths if the tools are not on PATH.
         L5XPLODE_EXE        = 'C:\\Users\\DevOps\\ra-logix-designer-vcs-custom-tools\\artifacts\\bin\\Release\\l5xplode.exe'
         L5XGIT_EXE          = 'C:\\Users\\DevOps\\ra-logix-designer-vcs-custom-tools\\artifacts\\bin\\Release\\l5xgit.exe'
     }
@@ -68,9 +66,9 @@ pipeline {
             steps {
                 powershell '''
                     $dirs = @(
-                        "$env:WORKSPACE\\02-ci\\generated\\l5x",
-                        "$env:WORKSPACE\\02-ci\\generated\\acd",
-                        "$env:WORKSPACE\\02-ci\\generated\\logs"
+                        (Join-Path $env:WORKSPACE '02-ci\\generated\\l5x'),
+                        (Join-Path $env:WORKSPACE '02-ci\\generated\\acd'),
+                        (Join-Path $env:WORKSPACE '02-ci\\generated\\logs')
                     )
 
                     foreach ($dir in $dirs) {
@@ -86,10 +84,14 @@ pipeline {
             }
             steps {
                 powershell '''
-                    & "$env:WORKSPACE\\${env.IMPLODE_SCRIPT.replace('/', '\\')}" `
-                        -InputPath "$env:WORKSPACE\\${env.EXPLODED_DIR.replace('/', '\\')}" `
-                        -OutputPath "$env:WORKSPACE\\${env.L5X_FILE.replace('/', '\\')}" `
-                        -ImplodeToolPath "${env.L5XPLODE_EXE}"
+                    $implodeScript = Join-Path $env:WORKSPACE $env:IMPLODE_SCRIPT
+                    $inputPath     = Join-Path $env:WORKSPACE $env:EXPLODED_DIR
+                    $outputPath    = Join-Path $env:WORKSPACE $env:L5X_FILE
+
+                    & $implodeScript `
+                        -InputPath $inputPath `
+                        -OutputPath $outputPath `
+                        -ImplodeToolPath $env:L5XPLODE_EXE
                 '''
             }
         }
@@ -100,10 +102,14 @@ pipeline {
             }
             steps {
                 powershell '''
-                    & "$env:WORKSPACE\\${env.L5X_TO_ACD_SCRIPT.replace('/', '\\')}" `
-                        -InputPath "$env:WORKSPACE\\${env.L5X_FILE.replace('/', '\\')}" `
-                        -OutputPath "$env:WORKSPACE\\${env.ACD_FILE.replace('/', '\\')}" `
-                        -ConverterToolPath "${env.L5XGIT_EXE}"
+                    $convertScript = Join-Path $env:WORKSPACE $env:L5X_TO_ACD_SCRIPT
+                    $inputPath     = Join-Path $env:WORKSPACE $env:L5X_FILE
+                    $outputPath    = Join-Path $env:WORKSPACE $env:ACD_FILE
+
+                    & $convertScript `
+                        -InputPath $inputPath `
+                        -OutputPath $outputPath `
+                        -ConverterToolPath $env:L5XGIT_EXE
                 '''
             }
         }
@@ -114,9 +120,13 @@ pipeline {
                     def requireAcdArg = params.RUN_LOGIX_BUILD_STAGES ? '-RequireAcd' : ''
 
                     powershell """
-                        & "\$env:WORKSPACE\\${env.RUN_TESTS_SCRIPT.replace('/', '\\')}" `
-                            -AcdPath "\$env:WORKSPACE\\${env.ACD_FILE.replace('/', '\\')}" `
-                            -SolutionPath "\$env:WORKSPACE\\${env.SOLUTION_FILE.replace('/', '\\')}" `
+                        \$testScript   = Join-Path \$env:WORKSPACE \$env:RUN_TESTS_SCRIPT
+                        \$acdPath      = Join-Path \$env:WORKSPACE \$env:ACD_FILE
+                        \$solutionPath = Join-Path \$env:WORKSPACE \$env:SOLUTION_FILE
+
+                        & \$testScript `
+                            -AcdPath \$acdPath `
+                            -SolutionPath \$solutionPath `
                             ${requireAcdArg}
                     """
                 }
