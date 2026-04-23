@@ -6,13 +6,6 @@ pipeline {
         timestamps()
     }
 
-    parameters {
-        booleanParam(
-            name: 'RUN_LOGIX_BUILD_STAGES',
-            defaultValue: true,
-            description: 'Run implode and L5X-to-ACD stages'
-        )
-    }
 
     environment {
         EXPLODED_DIR        = '01-vcs/exploded-content'
@@ -79,9 +72,7 @@ pipeline {
         }
 
         stage('Implode Exploded Content to L5X') {
-            when {
-                expression { params.RUN_LOGIX_BUILD_STAGES }
-            }
+            
             steps {
                 powershell '''
                     $implodeScript = Join-Path $env:WORKSPACE $env:IMPLODE_SCRIPT
@@ -97,9 +88,7 @@ pipeline {
         }
 
         stage('Convert L5X to ACD') {
-            when {
-                expression { params.RUN_LOGIX_BUILD_STAGES }
-            }
+            
             steps {
                 powershell '''
                     $convertScript = Join-Path $env:WORKSPACE $env:L5X_TO_ACD_SCRIPT
@@ -117,7 +106,7 @@ pipeline {
         stage('Run Echo CI Tests') {
             steps {
                 script {
-                    def requireAcdArg = params.RUN_LOGIX_BUILD_STAGES ? '-RequireAcd' : ''
+                    
 
                     powershell """
                         \$testScript   = Join-Path \$env:WORKSPACE \$env:RUN_TESTS_SCRIPT
@@ -127,7 +116,7 @@ pipeline {
                         & \$testScript `
                             -AcdPath \$acdPath `
                             -SolutionPath \$solutionPath `
-                            ${requireAcdArg}
+                            
                     """
                 }
             }
