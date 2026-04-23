@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Logic" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Comment><![CDATA["Sanity Check" 
+Make sure that the sizes  and other config values are correct]]></Comment>
+      <Text><![CDATA[[GT(Cfg_NumberOfFaults,64) MOVE(64,Cfg_NumberOfFaults) ,LT(Cfg_NumberOfFaults,0) CLR(Cfg_NumberOfFaults) ,LT(Cfg_CycleTime,0) MUL(Cfg_CycleTime,-1,Cfg_CycleTime) ,LT(Cfg_FaultDurationMin,0) MUL(Cfg_FaultDurationMin,-1,Cfg_FaultDurationMin) ,LT(Cfg_FaultDurationMax,0) MUL(Cfg_FaultDurationMax,-1,Cfg_FaultDurationMax) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Clear the Random number "copy" that is being used in the fault generation - to ensure that the fault is really only triggered once
+Copy input Cfg_ data into approrpriate locations]]></Comment>
+      <Text><![CDATA[[CLR(RandomNumber) ,MUL(Cfg_CycleTime,1000,TON_Cycle.PRE) MOVE(Cfg_NumberOfFaults,z_CTRL.LEN) SUB(Cfg_NumberOfFaults,1,i_max) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[If there are no faults to be generated, there is no need to continue with the code execution]]></Comment>
+      <Text><![CDATA[LE(Cfg_NumberOfFaults,0)MOVE(0,F)TND();]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Only generate random number every X milisecond]]></Comment>
+      <Text><![CDATA[[XIO(TON_Cycle.DN) TON(TON_Cycle,?,?) ,XIC(TON_Cycle.DN) [AOI_SIM_RNG_Simple(Random) ,MOVE(Random.Number,RandomNumber) ] ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Calculate the "fraction" of [0-1] range for each fault = basically the "smallest step" to increment the limit interval
+only perform this recalculation once every "fault generation cycle"
+
+1) Sum up all the individual "probability ratios" of all faults
+2) check that the "Overall Fault Probability" is within the correct interval
+3) calculate the "smallest incrementation step" used for setting comparison limits]]></Comment>
+      <Text><![CDATA[XIC(TON_Cycle.DN)[CLR(Wrk_FaultOccurencesSUM) XIO(z_CTRL.DN) FAL(z_CTRL,?,?,ALL,Wrk_FaultOccurencesSUM,Wrk_FaultOccurencesSUM+Cfg_FaultOccurences[z_CTRL.POS]) ,LIMIT(1,Cfg_FaultOccurenceAll,0) MOVE(0.5,Cfg_FaultOccurenceAll) ,NE(Wrk_FaultOccurencesSUM,0) DIV(Cfg_FaultOccurenceAll,Wrk_FaultOccurencesSUM,Wrk_Step) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[*********************************************************************************
+--> "loop" through the faults
+*********************************************************************************]]></Comment>
+      <Text><![CDATA[CLR(i)CLR(Wrk_StepLimit1);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[LBL(LOOP_Faults)NOP();]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Fault generation
+
+1) compute the comparison limits
+2) if the current random number is within the limits, generate the fault]]></Comment>
+      <Text><![CDATA[[CPT(Wrk_StepLimit2,Wrk_StepLimit1 + Wrk_Step * Cfg_FaultOccurences[i]) ,GT(RandomNumber,Wrk_StepLimit1) LE(RandomNumber,Wrk_StepLimit2) OTL(F.[i]) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[The actual upper limit of the fault's random number will become lower limit in the next cycle of the loop]]></Comment>
+      <Text><![CDATA[MOVE(Wrk_StepLimit2,Wrk_StepLimit1);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[When the fault becomes active, set the Preset of the timer to a random value between Cfg_FaultDurationMin seconds and Cfg_FaultDurationMax seconds]]></Comment>
+      <Text><![CDATA[XIC(F.[i])ONS(z_ONS[i])[AOI_SIM_RNG_Simple(Random) ,CPT(TONs_FaultHold[i].PRE,(Random.Number * (Cfg_FaultDurationMax - Cfg_FaultDurationMin) + Cfg_FaultDurationMin) * 1000) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[When the fault is active, run the timer
+And disable the fault when a preset period elapses
+]]></Comment>
+      <Text><![CDATA[XIC(F.[i])[TON(TONs_FaultHold[i],0,0) ,XIC(TONs_FaultHold[i].DN) OTU(F.[i]) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Next iteration of the loop
+or exit]]></Comment>
+      <Text><![CDATA[LT(i,i_max)ADD(i,1,i)JMP(LOOP_Faults);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Make the last result of Random Number call available to the "outside" (might be useful for some other fault generation procedures)]]></Comment>
+      <Text><![CDATA[MOVE(Random.Number,RandomNr);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="Motors" Class="Standard" TagType="Base" DataType="Motor" Dimensions="5" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+  <Data Format="L5K"><![CDATA[[[-2.00000000e-001,-1,0,100,0],[-2.00000000e-001,-1,0,120,0],[-2.00000000e-001,-1,0,140,0],[-2.00000000e-001
+		,-1,0,160,0],[-2.00000000e-001,-1,0,180,0]]]]></Data>
+  <Data Format="Decorated">
+    <Array DataType="Motor" Dimensions="5">
+      <Element Index="[0]">
+        <Structure DataType="Motor">
+          <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+          <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+          <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+          <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="100" />
+          <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+        </Structure>
+      </Element>
+      <Element Index="[1]">
+        <Structure DataType="Motor">
+          <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+          <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+          <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+          <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="120" />
+          <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+        </Structure>
+      </Element>
+      <Element Index="[2]">
+        <Structure DataType="Motor">
+          <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+          <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+          <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+          <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="140" />
+          <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+        </Structure>
+      </Element>
+      <Element Index="[3]">
+        <Structure DataType="Motor">
+          <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+          <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+          <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+          <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="160" />
+          <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+        </Structure>
+      </Element>
+      <Element Index="[4]">
+        <Structure DataType="Motor">
+          <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+          <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+          <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+          <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="180" />
+          <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+        </Structure>
+      </Element>
+    </Array>
+  </Data>
+</Tag>

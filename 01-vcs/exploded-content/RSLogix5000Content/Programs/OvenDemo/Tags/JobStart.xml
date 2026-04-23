@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="JobStart" TagType="Base" DataType="DATETIMESTRUCT" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+  <Data Format="L5K"><![CDATA[[1998,3,8,23,46,46,16656]]]></Data>
+  <Data Format="Decorated">
+    <Structure DataType="DATETIMESTRUCT">
+      <DataValueMember Name="Year" DataType="DINT" Radix="Decimal" Value="1998" />
+      <DataValueMember Name="Month" DataType="DINT" Radix="Decimal" Value="3" />
+      <DataValueMember Name="Day" DataType="DINT" Radix="Decimal" Value="8" />
+      <DataValueMember Name="Hour" DataType="DINT" Radix="Decimal" Value="23" />
+      <DataValueMember Name="Minute" DataType="DINT" Radix="Decimal" Value="46" />
+      <DataValueMember Name="Second" DataType="DINT" Radix="Decimal" Value="46" />
+      <DataValueMember Name="Microsecond" DataType="DINT" Radix="Decimal" Value="16656" />
+    </Structure>
+  </Data>
+</Tag>

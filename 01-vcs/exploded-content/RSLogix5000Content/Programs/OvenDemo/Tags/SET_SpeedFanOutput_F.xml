@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="SET_SpeedFanOutput_F" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+  <Description><![CDATA[Setpoints: Fan Speeds on Output]]></Description>
+  <Comments>
+    <Comment Operand="[0]"><![CDATA[DO NOT USE]]></Comment>
+  </Comments>
+  <Data Format="L5K"><![CDATA[[0,15,15,50]]]></Data>
+  <Data Format="Decorated">
+    <Array DataType="DINT" Dimensions="4" Radix="Decimal">
+      <Element Index="[0]" Value="0" />
+      <Element Index="[1]" Value="15" />
+      <Element Index="[2]" Value="15" />
+      <Element Index="[3]" Value="50" />
+    </Array>
+  </Data>
+</Tag>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AddOnInstructionDefinition Name="AOI_SIM_RNG_Simple" Class="Standard" Revision="1.3" Vendor="Dr. Frank Jordan / Rockwell Automation" ExecutePrescan="true" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2013-06-09T12:25:48.173Z" CreatedBy="WIN-FJASSBQU6AJ\RA" EditedDate="2013-10-18T11:25:49.197Z" EditedBy="RA-INT\RdeRijke" SoftwareRevision="v20.01">
+  <Description><![CDATA[Simple Random Number Generator]]></Description>
+  <RevisionNote><![CDATA[This code is provided as application example without any warranty]]></RevisionNote>
+  <AdditionalHelpText><![CDATA[George Marsaglia 's MWC (multiply with carry) algorithm
+(taken from http://www.codeproject.com/Articles/25172/Simple-Random-Number-Generation)]]></AdditionalHelpText>
+  <Parameters>
+    <Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+      <Description><![CDATA[Enable Input - System Defined Parameter]]></Description>
+    </Parameter>
+    <Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+      <Description><![CDATA[Enable Output - System Defined Parameter]]></Description>
+    </Parameter>
+    <Parameter Name="Seed" TagType="Alias" Usage="Input" Radix="Decimal" AliasFor="LocalSeed" Required="false" Visible="true" ExternalAccess="Read Only" />
+    <Parameter Name="Count" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </Parameter>
+    <Parameter Name="Number" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+      <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+      </DefaultData>
+    </Parameter>
+    <Parameter Name="TriggerSeed" TagType="Alias" Usage="Input" Radix="Decimal" AliasFor="LocalTriggerSeed" Required="false" Visible="true" ExternalAccess="Read Only" />
+    <Parameter Name="Reset" TagType="Alias" Usage="Input" Radix="Decimal" AliasFor="LocalReset" Required="false" Visible="true" ExternalAccess="Read Only" />
+  </Parameters>
+  <LocalTags>
+    <LocalTag Name="m_z" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="m_w" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="delta" DataType="REAL" Radix="Float" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="consB" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="consA" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="AOI_UMUL" DataType="UMUL" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[[1,0,0,0,0,[0,0,0,0,0,0],[0,0,0,0,0,0],0,0,0]]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <Structure DataType="UMUL">
+          <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+          <DataValueMember Name="EnableOut" DataType="BOOL" Value="0" />
+          <DataValueMember Name="V1" DataType="DINT" Radix="Decimal" Value="0" />
+          <DataValueMember Name="V2" DataType="DINT" Radix="Decimal" Value="0" />
+          <DataValueMember Name="Sts_C" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Sts_N" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Sts_V" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Sts_Z" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Out" DataType="DINT" Radix="Decimal" Value="0" />
+        </Structure>
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="u" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="AOI_UADD" DataType="UADD" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[[1,0,0,0,0,0,0,0,0,0,0]]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <Structure DataType="UADD">
+          <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+          <DataValueMember Name="EnableOut" DataType="BOOL" Value="0" />
+          <DataValueMember Name="V1" DataType="DINT" Radix="Decimal" Value="0" />
+          <DataValueMember Name="V2" DataType="DINT" Radix="Decimal" Value="0" />
+          <DataValueMember Name="Out" DataType="DINT" Radix="Decimal" Value="0" />
+          <DataValueMember Name="Sts_C" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Sts_N" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Sts_V" DataType="BOOL" Value="0" />
+          <DataValueMember Name="Sts_Z" DataType="BOOL" Value="0" />
+        </Structure>
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="LocalTriggerSeed" DataType="BOOL" Radix="Decimal" ExternalAccess="Read Only">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="LocalSeed" DataType="DINT" Radix="Decimal" ExternalAccess="Read Only">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="LocalReset" DataType="BOOL" Radix="Decimal" ExternalAccess="Read Only">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="tmp" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+    <LocalTag Name="Overflow" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+      <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+      <DefaultData Format="Decorated">
+        <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+      </DefaultData>
+    </LocalTag>
+  </LocalTags>
+  <Routines />
+  <Dependencies>
+    <Dependency Type="AddOnInstructionDefinition" Name="UADD" />
+    <Dependency Type="AddOnInstructionDefinition" Name="UMUL" />
+  </Dependencies>
+</AddOnInstructionDefinition>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="EnableInFalse" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Text><![CDATA[MOVE(0,F);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

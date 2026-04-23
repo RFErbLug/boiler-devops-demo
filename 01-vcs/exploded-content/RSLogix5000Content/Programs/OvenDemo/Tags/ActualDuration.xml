@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="ActualDuration" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+  <Data Format="L5K"><![CDATA[71]]></Data>
+  <Data Format="Decorated">
+    <DataValue DataType="DINT" Radix="Decimal" Value="71" />
+  </Data>
+</Tag>

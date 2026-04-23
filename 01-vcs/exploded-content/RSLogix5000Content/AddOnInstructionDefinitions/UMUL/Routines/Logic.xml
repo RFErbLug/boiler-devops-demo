@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Logic" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Text><![CDATA[FLL(0,WRK[0],6);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[MVM(V1,2047,WRK[0])MVM(V2,2047,WRK[1])MUL(WRK[0],WRK[1],WRKm[0]);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[BTD(V1,11,WRK[2],0,11)BTD(V2,11,WRK[3],0,11)MUL(WRK[0],WRK[3],WRKm[1])MUL(WRK[1],WRK[2],WRKm[2]);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[BTD(V1,22,WRK[4],0,10)BTD(V2,22,WRK[5],0,10)MUL(WRK[2],WRK[3],WRKm[3])MUL(WRK[0],WRK[5],WRKm[4])MUL(WRK[1],WRK[4],WRKm[5]);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(Out)MVM(WRKm[0],2047,Out);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(Mid)BTD(WRKm[0],11,Mid,0,11);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[ADD(Mid,WRKm[1],Mid)ADD(Mid,WRKm[2],Mid)BTD(Mid,0,Out,11,11);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(High)BTD(Mid,11,High,0,11);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[ADD(High,WRKm[3],High)ADD(High,WRKm[4],High)ADD(High,WRKm[5],High)BTD(High,0,Out,22,10);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(High.11)OTE(Sts_C);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Out.31)OTE(Sts_N);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[[XIC(Sts_N) ,GE(High,2048) ]OTE(Sts_V);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIO(Sts_C)EQ(Out,0)OTE(Sts_Z);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

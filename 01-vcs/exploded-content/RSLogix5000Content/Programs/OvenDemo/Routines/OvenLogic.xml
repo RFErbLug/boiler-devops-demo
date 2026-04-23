@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="OvenLogic" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Comment><![CDATA[Switch to next phase
+
+Lines 167 - 206 of C# [ part of private void SetPointPhase(int phase) ]]]></Comment>
+      <Text><![CDATA[XIC(zCTRL_SetPointPhase)LT(ActualPhase,4)[MOVE(SET_SpeedFanInput_F[ActualPhase],SpeedFanInput) MOVE(SET_SpeedFanOutput_F[ActualPhase],SpeedFanOutput) ,MOVE(SET_Duration_F[ActualPhase],WRK_TimeToFinishPhase) MOVE(SET_TemperatureSetpoint_F[ActualPhase],ActualSetpoint) ,GT(ActualPhase,1) CPT(kWh,kWh + (kW * SET_Duration_F[ActualPhase-1]) / 3600) ,CPT(kW,3 * (SpeedFanInput / 100) + 3 * (SpeedFanOutput / 100)) ,OTU(zCTRL_SetPointPhase) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Get a timestamp (to record duration of scan for "timing")]]></Comment>
+      <Text><![CDATA[[GSV(CST,,CurrentValue,WRK_interval_CSTactual[0]) ,XIC(zCTRL_FirstRunBit) COP(WRK_interval_CSTactual[0],WRK_interval_CSTprevious[0],1) OTU(zCTRL_FirstRunBit) ,SUB(WRK_interval_CSTactual[0],WRK_interval_CSTprevious[0],WRK_interval) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Calculate the times
+
+Wehn the time of the phase is done -> switch to another phase
+
+Lines 230 - 246 of C# [ OvenLogic() ]
+Lines 279 - 292 of C#  [ OvenLogic() ]]]></Comment>
+      <Text><![CDATA[[[CPT(WRK_TimeToFinishPhase,WRK_TimeToFinishPhase - (WRK_interval / 1000000)) CPT(WRK_TimeToFinishAll,WRK_TimeToFinishAll - (WRK_interval / 1000000)) ,MOVE(WRK_TimeToFinishPhase,TimeToFinishPhase) MOVE(WRK_TimeToFinishAll,TimeToFinishAll) CPT(ActualDuration,SET_Duration_F[1] + SET_Duration_F[2] + SET_Duration_F[3] - WRK_TimeToFinishAll) ] ,LE(WRK_TimeToFinishPhase,0) [MOVE(SET_Duration_F[ActualPhase],ActualDuration_F[ActualPhase]) ,ADD(ActualPhase,1,ActualPhase) OTL(zCTRL_SetPointPhase) ] ,GT(WRK_TimeToFinishPhase,0) SUB(SET_Duration_F[ActualPhase],TimeToFinishPhase,ActualDuration_F[ActualPhase]) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[COP(WRK_interval_CSTactual[0],WRK_interval_CSTprevious[0],1);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Filter use timer
+
+Lines 274, 275 of C#  [ OvenLogic() ]]]></Comment>
+      <Text><![CDATA[LT(UseMinute,SET_FilterLimit)ADD(WRK_useMinute,WRK_interval,WRK_useMinute)DIV(WRK_useMinute,1000000,UseMinute);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[End the sequence (after the last phase is ended)
+
+Lines 212 - 217 and 221 of C# [ part of private void SetPointPhase(int phase) ]]]></Comment>
+      <Text><![CDATA[XIC(zCTRL_SetPointPhase)GE(ActualPhase,4)[ADD(CycleNumber,1,CycleNumber) ,GSV(WallClockTime,,DateTime,JobFinish.Year) ,OTU(zCTRL_SetPointPhase) ,OTL(zCTRL_Finished_STOP) ];]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

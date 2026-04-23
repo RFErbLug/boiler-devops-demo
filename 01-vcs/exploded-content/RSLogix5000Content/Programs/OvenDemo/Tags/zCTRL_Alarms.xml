@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="zCTRL_Alarms" TagType="Base" DataType="AOI_FaultGen" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+  <Comments>
+    <Comment Operand=".F.0"><![CDATA[Temperature Alarm]]></Comment>
+    <Comment Operand=".F.1"><![CDATA[Fan Alarm]]></Comment>
+    <Comment Operand=".F.2"><![CDATA[Door Alarm]]></Comment>
+  </Comments>
+  <Data Format="L5K"><![CDATA[[3,3,5.00000000e-002,1,5,0,8.91879200e-001,[[3406987,4847,0],[2636141,3403,0],[3384623,4983,0],[0,0,0],[0,0,0],[0,0,0],[0
+		,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0
+		,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0
+		,0,0],[0,0,0],[0,0,0],[0,0,0]],[0,3,0],0.00000000e+000,[-1070322085,1500,1099],300,1.66666665e-004,2,4.99999970e-002
+		,4.99999970e-002,[2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0
+		,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0
+		,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0],[0,27,8.91879200e-001,2070459493,804042358
+		,2.32830644e-010,18000,36969,[3,18000,44669,804042000,0,[1616,1661,8,21,0,0],[2684176,33936,13288,168,0,0
+		],0,48534,191],1683108318,[27,-1268417688,804042358,-464375330,46181,31592,12268,46710,78302,58450
+		,58450],521288629,46181],[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
+		,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
+		,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],2,1.50000000e+000]]]></Data>
+  <Data Format="Decorated">
+    <Structure DataType="AOI_FaultGen">
+      <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+      <DataValueMember Name="EnableOut" DataType="BOOL" Value="1" />
+      <DataValueMember Name="Cfg_NumberOfFaults" DataType="DINT" Radix="Decimal" Value="3" />
+      <DataValueMember Name="Cfg_FaultOccurenceAll" DataType="REAL" Radix="Float" Value="0.05" />
+      <DataValueMember Name="Cfg_FaultDurationMin" DataType="DINT" Radix="Decimal" Value="1" />
+      <DataValueMember Name="Cfg_FaultDurationMax" DataType="DINT" Radix="Decimal" Value="5" />
+      <DataValueMember Name="F" DataType="LINT" Radix="Decimal" Value="0" />
+      <DataValueMember Name="RandomNr" DataType="REAL" Radix="Float" Value="0.8918792" />
+    </Structure>
+  </Data>
+</Tag>

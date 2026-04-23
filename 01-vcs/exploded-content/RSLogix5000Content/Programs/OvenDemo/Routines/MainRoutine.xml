@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="MainRoutine" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Comment><![CDATA[START the oven
+
+Lines 123 - 133 of C# [ the "entry" condition = private void StartStop_VariableChange( ... ]
+Lines 152 - 165 [ ResetOven() ]
+Lines 298 - 311 [ StartOven() ]]]></Comment>
+      <Text><![CDATA[XIO(Running)XIC(StartStop)[CLR(ActualDuration_F[1]) CLR(ActualDuration_F[2]) CLR(ActualDuration_F[3]) CLR(ActualDuration) ,CLR(SpeedFanInput) CLR(SpeedFanOutput) CLR(WRK_TimeToFinishAll) ,CLR(Gas) CLR(kWh) ,GSV(WallClockTime,,DateTime,JobStart.Year) MOVE(RecipeName,JobRecipe) ,ADD(WRK_TimeToFinishAll,SET_Duration_F[1],WRK_TimeToFinishAll) ADD(WRK_TimeToFinishAll,SET_Duration_F[2],WRK_TimeToFinishAll) ADD(WRK_TimeToFinishAll,SET_Duration_F[3],WRK_TimeToFinishAll) ,MOVE(1,ActualPhase) OTL(zCTRL_SetPointPhase) OTL(zCTRL_FirstRunBit) ,OTL(Running) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[STOP the oven
+
+Lines 123 - 133 of C# [ the "entry" condition = private void StartStop_VariableChange( ... ]
+Lines 139 - 150 of C# [ private void StopOven() ]]]></Comment>
+      <Text><![CDATA[XIC(Running)[XIO(StartStop) ,XIC(zCTRL_Finished_STOP) ][CLR(ActualPhase) CLR(SpeedFanInput) CLR(SpeedFanOutput) ,CPT(kWh,kWh + (kWh * SET_Duration_F[3]) / 3600) ,MOVE(Gas,JobGas) MOVE(kWh,JobkWh) ,OTU(Running) ,OTU(StartStop) ,OTU(zCTRL_Finished_STOP) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Running)JSR(OvenLogic,0);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Generates a random number every 1.5 seconds
+If the random number is between 0.0 and 0.05, then the interval is "split" in three ( Cfg_NumberOfFaults ) and one of the three outputs is set.
+Reset back to zero after a time between 1 and 5 seconds ( Cfg_FaultDurationMin, Cfg_FaultDurationMax )]]></Comment>
+      <Text><![CDATA[AOI_FaultGen(zCTRL_Alarms);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Running)JSR(Alarms,0);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Execute "Oven Temperature Simulation" every 250 ms
+
+Lines 111 - 112 of C#]]></Comment>
+      <Text><![CDATA[[MOVE(250,zCTRL_Timer.PRE) ,XIO(zCTRL_Timer.DN) TON(zCTRL_Timer,?,?) ,XIC(zCTRL_Timer.DN) JSR(OvenTemperature,0) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Reset the filter use timer
+
+Lines 391- 395 of C#   [  public void ResetFilter()  ]]]></Comment>
+      <Text><![CDATA[XIC(ResetFilter)[CLR(WRK_useMinute) CLR(UseMinute) ,OTU(ResetFilter) ];]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

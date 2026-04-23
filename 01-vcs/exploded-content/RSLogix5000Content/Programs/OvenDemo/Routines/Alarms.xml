@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Alarms" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Comment><![CDATA[Lines 115 - 121 of C#]]></Comment>
+      <Text><![CDATA[GT(UseMinute,SET_FilterLimit)OTE(FilterAlarm);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(zCTRL_Alarms.F.0)OTE(TemperatureAlarm);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(zCTRL_Alarms.F.1)OTE(FanAlarm);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(zCTRL_Alarms.F.2)OTE(DoorAlarm);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

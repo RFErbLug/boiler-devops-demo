@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="zCTRL_Timer" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+  <Data Format="L5K"><![CDATA[[-1070322095,250,89]]]></Data>
+  <Data Format="Decorated">
+    <Structure DataType="TIMER">
+      <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="250" />
+      <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="89" />
+      <DataValueMember Name="EN" DataType="BOOL" Value="1" />
+      <DataValueMember Name="TT" DataType="BOOL" Value="1" />
+      <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+    </Structure>
+  </Data>
+</Tag>

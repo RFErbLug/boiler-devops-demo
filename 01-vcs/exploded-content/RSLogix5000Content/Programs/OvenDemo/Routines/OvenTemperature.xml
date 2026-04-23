@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="OvenTemperature" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Comment><![CDATA[Lines 356, 317 and 337 of C#]]></Comment>
+      <Text><![CDATA[[XIO(Running) XIO(Preheating) CLR(WRK_TemperatureSetpoint) ,XIC(Running) MOVE(ActualSetpoint,WRK_TemperatureSetpoint) ,XIC(Preheating) MOVE(SET_PreheatingTemperature,WRK_TemperatureSetpoint) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA["Throttle logic"
+
+Lines 317-18, 321-326, 337-345 of C#   [ UpdateOvenTemperature() ]]]></Comment>
+      <Text><![CDATA[[CPT(WRK_throttle,10 - (1 - (WRK_TemperatureSetpoint - ActualTemperature) / 40) * 10) ,GE(ActualTemperature,WRK_TemperatureSetpoint) CLR(WRK_throttle) ,CMP(WRK_TemperatureSetpoint - ActualTemperature > 40) MOVE(10,WRK_throttle) ];]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Temperature "Simulation"
+
+Lines 328-336, 347-366 of C#  [ UpdateOvenTemperature() ]]]></Comment>
+      <Text><![CDATA[NE(ActualTemperature,WRK_TemperatureSetpoint)CPT(ActualTemperature,ActualTemperature + (WRK_TemperatureSetpoint - ActualTemperature) * 0.1);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[MOVE(WRK_throttle,GasThrottle);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Gas and electricity consumption
+
+Lines 319, 370-376, 385-389 of C#]]></Comment>
+      <Text><![CDATA[XIC(Running)[CPT(WRK_kWh_change,(kW * zCTRL_Timer.PRE/1000) / 3600) ADD(kWh,WRK_kWh_change,kWh) ADD(TotEE,WRK_kWh_change,TotEE) ,CPT(WRK_Gas_change,((GasThrottle * zCTRL_Timer.PRE/1000) / 3600) / 4) ADD(Gas,WRK_Gas_change,Gas) ADD(TotLPG,WRK_Gas_change,TotLPG) ];]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="WRK_interval_CSTactual" TagType="Base" DataType="DINT" Dimensions="2" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+  <Data Format="L5K"><![CDATA[[190188671,2]]]></Data>
+  <Data Format="Decorated">
+    <Array DataType="DINT" Dimensions="2" Radix="Decimal">
+      <Element Index="[0]" Value="190188671" />
+      <Element Index="[1]" Value="2" />
+    </Array>
+  </Data>
+</Tag>

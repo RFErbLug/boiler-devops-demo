@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tag Name="TestIncrementTag" Class="Standard" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+  <Data Format="L5K"><![CDATA[91]]></Data>
+  <Data Format="Decorated">
+    <DataValue DataType="DINT" Radix="Decimal" Value="91" />
+  </Data>
+</Tag>

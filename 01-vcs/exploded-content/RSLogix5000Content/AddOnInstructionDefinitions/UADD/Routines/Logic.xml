@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Logic" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Text><![CDATA[SWPB(V1,WORD,tmp)CLR(V1_Hi)MVM(tmp,65535,V1_Hi);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(V1_Lo)MVM(V1,65535,V1_Lo);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[SWPB(V2,WORD,tmp)CLR(V2_Hi)MVM(tmp,65535,V2_Hi);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(V2_Lo)MVM(V2,65535,V2_Lo);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[ADD(V1_Lo,V2_Lo,SumLo)ADD(V1_Hi,V2_Hi,SumHi);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(SumLo.16)ADD(SumHi,1,SumHi);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(tmp)MVM(SumHi,65535,tmp)SWPB(SumHi,WORD,Out)MVM(SumLo,65535,Out);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(SumHi.16)OTE(Sts_C);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Out.31)OTE(Sts_N);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[[XIC(Sts_N) ,XIC(Sts_C) ]OTE(Sts_V);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIO(Sts_C)EQ(Out,0)OTE(Sts_Z);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

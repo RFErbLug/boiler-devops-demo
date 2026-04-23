@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Prescan" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Text><![CDATA[OTU(LocalTriggerSeed)OTU(LocalReset);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[MOVE(36969,consA)MOVE(18000,consB);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[CLR(Count)MOVE(521288629,LocalSeed);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[[EQ(m_w,0) ,EQ(m_z,0) ,EQ(delta,0.0) ][MOVE(LocalSeed,m_w) ,MOVE(362436069,m_z) ,MOVE(2.328306435454494e-10,delta) ];]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

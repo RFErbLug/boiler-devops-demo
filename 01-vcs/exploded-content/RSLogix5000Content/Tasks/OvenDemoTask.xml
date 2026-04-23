@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Task Name="OvenDemoTask" Type="CONTINUOUS" Priority="10" Watchdog="500" DisableUpdateOutputs="false" InhibitTask="false" Class="Standard" SynchronizeRedundancyDataDisabled="false">
+  <ScheduledPrograms>
+    <ScheduledProgram Name="OvenDemo" />
+  </ScheduledPrograms>
+</Task>

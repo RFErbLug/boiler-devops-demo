@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Logic" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Reset)CLR(Count)MOVE(521288629,LocalSeed)MOVE(LocalSeed,m_w)OTU(Reset);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(TriggerSeed)CLR(Count)MOVE(LocalSeed,m_w)OTU(TriggerSeed);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[EQ(Count,2147483647)MOVE(-1,Count)OTE(Overflow);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIO(Overflow)ADD(Count,1,Count);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[m_z = consA * (m_z & 0xffff) + (m_z >>16)]]></Comment>
+      <Text><![CDATA[MOVE(consA,AOI_UMUL.V1)CLR(AOI_UMUL.V2)MVM(m_z,65535,AOI_UMUL.V2)UMUL(AOI_UMUL);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[MOVE(AOI_UMUL.Out,AOI_UADD.V1)SWPB(m_z,WORD,tmp)CLR(AOI_UADD.V2)MVM(tmp,65535,AOI_UADD.V2)UADD(AOI_UADD)MOVE(AOI_UADD.Out,m_z);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[m_z = consB * (m_w & 0xffff) + (m_w >>16)]]></Comment>
+      <Text><![CDATA[MOVE(consB,AOI_UMUL.V1)CLR(AOI_UMUL.V2)MVM(m_w,65535,AOI_UMUL.V2)UMUL(AOI_UMUL);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[MOVE(AOI_UMUL.Out,AOI_UADD.V1)SWPB(m_w,WORD,tmp)CLR(AOI_UADD.V2)MVM(tmp,65535,AOI_UADD.V2)UADD(AOI_UADD)MOVE(AOI_UADD.Out,m_w);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[u = (m_z <<16) + m_w]]></Comment>
+      <Text><![CDATA[CLR(tmp)MVM(m_z,65535,tmp)SWPB(m_z,WORD,AOI_UADD.V1);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[MOVE(m_w,AOI_UADD.V2)UADD(AOI_UADD)MOVE(AOI_UADD.Out,u);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(AOI_UADD.Sts_N)OTU(u.31);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[ADD(u,1.0,Number)XIC(AOI_UADD.Sts_N)ADD(2.147483648e9,Number,Number);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Comment><![CDATA[Number = (u+1) * delta]]></Comment>
+      <Text><![CDATA[MUL(Number,delta,Number);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>

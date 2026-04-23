@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Module Name="Local" CatalogNumber="1756-L84ES" Vendor="1" ProductType="14" ProductCode="214" Major="38" Minor="11" ParentModule="Local" ParentModPortId="1" Inhibited="false" MajorFault="true">
+  <EKey State="Disabled" />
+  <Ports>
+    <Port Id="1" Address="0" Type="ICP" Upstream="false" SafetyNetwork="16#0000_486c_0183_d9e7">
+      <Bus Size="4" />
+    </Port>
+    <Port Id="2" Type="Ethernet" Upstream="false" SafetyNetwork="16#0000_486c_0183_d9e8">
+      <Bus />
+    </Port>
+  </Ports>
+</Module>
