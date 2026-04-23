@@ -33,9 +33,6 @@ if (-not (Test-Path -Path $outputDir)) {
     New-Item -ItemType Directory -Path $outputDir -Force | Out-Null
 }
 
-if (Test-Path -Path $outputPathFull -PathType Leaf) {
-    Remove-Item -Path $outputPathFull -Force
-}
 
 Write-Host "InputPath         : $resolvedInput"
 Write-Host "OutputPath        : $outputPathFull"
