@@ -1,0 +1,2425 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="38.01" TargetName="Oven_and_Boiler_V35" TargetType="Controller" ContainsContext="false" ExportOptions="NoRawData L5KData DecoratedData Dependencies ForceProtectedEncoding AllProjDocTrans">
+  <Controller Use="Target" Name="Oven_and_Boiler_V35" ProcessorType="1756-L84ES" MajorRev="38" MinorRev="11" ProjectCreationDate="Mon Nov 14 04:10:41 2022" SFCExecutionControl="CurrentActive" SFCRestartPosition="MostRecent" SFCLastScan="DontScan" CommPath="EmulateEthernet\127.0.0.1" ProjectSN="16#00e8_4d1e" MatchProjectToController="false" CanUseRPIFromProducer="false" InhibitAutomaticFirmwareUpdate="0" PassThroughConfiguration="EnabledWithAppend" DownloadProjectDocumentationAndExtendedProperties="true" DownloadProjectCustomProperties="true" ReportMinorOverflow="false" AutoDiagsEnabled="true" WebServerEnabled="false" DataExchangeId="{E67D2B2F-46DE-4F83-A93B-9707C32191C1}">
+    <RedundancyInfo Enabled="false" KeepTestEditsOnSwitchOver="false" />
+    <Security Code="0" ChangesToDetect="16#ffff_ffff_ffff_ffff" />
+    <SafetyInfo SafetyLocked="false" SignatureRunModeProtect="false" ConfigureSafetyIOAlways="false" SafetyLevel="SIL2/PLd" />
+    <DataTypes>
+      <DataType Name="DATETIMESTRUCT" Family="NoFamily" Class="User">
+        <Members>
+          <Member Name="Year" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Month" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Day" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Hour" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Minute" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Second" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Microsecond" DataType="DINT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+        </Members>
+      </DataType>
+      <DataType Name="Motor" Family="NoFamily" Class="User">
+        <Members>
+          <Member Name="Power" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="Speed" DataType="INT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="ZZZZZZZZZZMotor2" DataType="SINT" Dimension="0" Radix="Decimal" Hidden="true" ExternalAccess="Read/Write" />
+          <Member Name="CmdOffOn" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZMotor2" BitNumber="0" ExternalAccess="Read/Write" />
+          <Member Name="SetSpeed" DataType="INT" Dimension="0" Radix="Decimal" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="ZZZZZZZZZZMotor5" DataType="SINT" Dimension="0" Radix="Decimal" Hidden="true" ExternalAccess="Read/Write" />
+          <Member Name="Status" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZMotor5" BitNumber="0" ExternalAccess="Read/Write" />
+        </Members>
+      </DataType>
+      <DataType Name="Tank" Family="NoFamily" Class="User">
+        <Members>
+          <Member Name="ZZZZZZZZZZTank0" DataType="SINT" Dimension="0" Radix="Decimal" Hidden="true" ExternalAccess="Read/Write" />
+          <Member Name="ValveInStatus" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="0" ExternalAccess="Read/Write" />
+          <Member Name="ValveInCmd" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="1" ExternalAccess="Read/Write" />
+          <Member Name="ValveOutStatus" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="2" ExternalAccess="Read/Write" />
+          <Member Name="ValveOutCmd" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="3" ExternalAccess="Read/Write" />
+          <Member Name="Level" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="SetPoint" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write" />
+        </Members>
+      </DataType>
+      <DataType Name="TankUDT" Family="NoFamily" Class="User">
+        <Members>
+          <Member Name="ZZZZZZZZZZTank0" DataType="SINT" Dimension="0" Radix="Decimal" Hidden="true" ExternalAccess="Read/Write" />
+          <Member Name="ValveInStatus" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="0" ExternalAccess="Read/Write" />
+          <Member Name="ValveInCmd" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="1" ExternalAccess="Read/Write" />
+          <Member Name="ValveOutStatus" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="2" ExternalAccess="Read/Write" />
+          <Member Name="ValveOutCmd" DataType="BIT" Dimension="0" Radix="Decimal" Hidden="false" Target="ZZZZZZZZZZTank0" BitNumber="3" ExternalAccess="Read/Write" />
+          <Member Name="Level" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write" />
+          <Member Name="SetPoint" DataType="REAL" Dimension="0" Radix="Float" Hidden="false" ExternalAccess="Read/Write" />
+        </Members>
+      </DataType>
+    </DataTypes>
+    <Modules>
+      <Module Name="Local" CatalogNumber="1756-L84ES" Vendor="1" ProductType="14" ProductCode="214" Major="38" Minor="11" ParentModule="Local" ParentModPortId="1" Inhibited="false" MajorFault="true">
+        <EKey State="Disabled" />
+        <Ports>
+          <Port Id="1" Address="0" Type="ICP" Upstream="false" SafetyNetwork="16#0000_486c_0183_d9e7">
+            <Bus Size="4" />
+          </Port>
+          <Port Id="2" Type="Ethernet" Upstream="false" SafetyNetwork="16#0000_486c_0183_d9e8">
+            <Bus />
+          </Port>
+        </Ports>
+      </Module>
+    </Modules>
+    <AddOnInstructionDefinitions>
+      <AddOnInstructionDefinition Name="UADD" Class="Standard" Revision="1.1" Vendor="Dr. Frank Jordan / Rockwell Automation" ExecutePrescan="false" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2013-06-10T14:08:02.386Z" CreatedBy="WIN-FJASSBQU6AJ\RA" EditedDate="2014-08-28T13:40:19.196Z" EditedBy="RA-INT\RdeRijke" SoftwareRevision="v21.03">
+        <Description><![CDATA[Addition of  two unsigned DINT
+(without overflow / minor faults)]]></Description>
+        <RevisionNote><![CDATA[This code is provided as application example without any warranty]]></RevisionNote>
+        <Parameters>
+          <Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Input - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Output - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="V1" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="V2" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Out" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_C" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Carry result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_N" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Negative result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_V" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Overflow result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_Z" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Zero result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+        </Parameters>
+        <LocalTags>
+          <LocalTag Name="V1_Hi" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="V1_Lo" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="V2_Hi" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="V2_Lo" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="SumLo" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="SumHi" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="tmp" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+        </LocalTags>
+        <Routines>
+          <Routine Name="Logic" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[SWPB(V1,WORD,tmp)CLR(V1_Hi)MVM(tmp,65535,V1_Hi);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[CLR(V1_Lo)MVM(V1,65535,V1_Lo);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[SWPB(V2,WORD,tmp)CLR(V2_Hi)MVM(tmp,65535,V2_Hi);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[CLR(V2_Lo)MVM(V2,65535,V2_Lo);]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Text><![CDATA[ADD(V1_Lo,V2_Lo,SumLo)ADD(V1_Hi,V2_Hi,SumHi);]]></Text>
+              </Rung>
+              <Rung Number="5" Type="N">
+                <Text><![CDATA[XIC(SumLo.16)ADD(SumHi,1,SumHi);]]></Text>
+              </Rung>
+              <Rung Number="6" Type="N">
+                <Text><![CDATA[CLR(tmp)MVM(SumHi,65535,tmp)SWPB(SumHi,WORD,Out)MVM(SumLo,65535,Out);]]></Text>
+              </Rung>
+              <Rung Number="7" Type="N">
+                <Text><![CDATA[XIC(SumHi.16)OTE(Sts_C);]]></Text>
+              </Rung>
+              <Rung Number="8" Type="N">
+                <Text><![CDATA[XIC(Out.31)OTE(Sts_N);]]></Text>
+              </Rung>
+              <Rung Number="9" Type="N">
+                <Text><![CDATA[[XIC(Sts_N) ,XIC(Sts_C) ]OTE(Sts_V);]]></Text>
+              </Rung>
+              <Rung Number="10" Type="N">
+                <Text><![CDATA[XIO(Sts_C)EQ(Out,0)OTE(Sts_Z);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+        </Routines>
+      </AddOnInstructionDefinition>
+      <AddOnInstructionDefinition Name="UMUL" Class="Standard" Revision="1.2" Vendor="Dr. Frank Jordan / Rockwell Automation" ExecutePrescan="false" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2013-06-10T13:27:55.030Z" CreatedBy="WIN-FJASSBQU6AJ\RA" EditedDate="2014-08-28T13:42:23.013Z" EditedBy="RA-INT\RdeRijke" SoftwareRevision="v21.03">
+        <Description><![CDATA[Multiplication of  two unsigned DINT
+(without overflow / minor faults)]]></Description>
+        <RevisionNote><![CDATA[This code is provided as application example without any warranty]]></RevisionNote>
+        <Parameters>
+          <Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Input - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Output - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="V1" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="V2" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_C" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Carry result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_N" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Negative result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_V" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Overflow result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Sts_Z" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <Description><![CDATA[Zero result]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Out" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+        </Parameters>
+        <LocalTags>
+          <LocalTag Name="tmp" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="WRK" DataType="INT" Dimensions="6" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[0,0,0,0,0,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Array DataType="INT" Dimensions="6" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="0" />
+                <Element Index="[2]" Value="0" />
+                <Element Index="[3]" Value="0" />
+                <Element Index="[4]" Value="0" />
+                <Element Index="[5]" Value="0" />
+              </Array>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="WRKm" DataType="DINT" Dimensions="6" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[0,0,0,0,0,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Array DataType="DINT" Dimensions="6" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="0" />
+                <Element Index="[2]" Value="0" />
+                <Element Index="[3]" Value="0" />
+                <Element Index="[4]" Value="0" />
+                <Element Index="[5]" Value="0" />
+              </Array>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Low" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Mid" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="High" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+        </LocalTags>
+        <Routines>
+          <Routine Name="Logic" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[FLL(0,WRK[0],6);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[MVM(V1,2047,WRK[0])MVM(V2,2047,WRK[1])MUL(WRK[0],WRK[1],WRKm[0]);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[BTD(V1,11,WRK[2],0,11)BTD(V2,11,WRK[3],0,11)MUL(WRK[0],WRK[3],WRKm[1])MUL(WRK[1],WRK[2],WRKm[2]);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[BTD(V1,22,WRK[4],0,10)BTD(V2,22,WRK[5],0,10)MUL(WRK[2],WRK[3],WRKm[3])MUL(WRK[0],WRK[5],WRKm[4])MUL(WRK[1],WRK[4],WRKm[5]);]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Text><![CDATA[CLR(Out)MVM(WRKm[0],2047,Out);]]></Text>
+              </Rung>
+              <Rung Number="5" Type="N">
+                <Text><![CDATA[CLR(Mid)BTD(WRKm[0],11,Mid,0,11);]]></Text>
+              </Rung>
+              <Rung Number="6" Type="N">
+                <Text><![CDATA[ADD(Mid,WRKm[1],Mid)ADD(Mid,WRKm[2],Mid)BTD(Mid,0,Out,11,11);]]></Text>
+              </Rung>
+              <Rung Number="7" Type="N">
+                <Text><![CDATA[CLR(High)BTD(Mid,11,High,0,11);]]></Text>
+              </Rung>
+              <Rung Number="8" Type="N">
+                <Text><![CDATA[ADD(High,WRKm[3],High)ADD(High,WRKm[4],High)ADD(High,WRKm[5],High)BTD(High,0,Out,22,10);]]></Text>
+              </Rung>
+              <Rung Number="9" Type="N">
+                <Text><![CDATA[XIC(High.11)OTE(Sts_C);]]></Text>
+              </Rung>
+              <Rung Number="10" Type="N">
+                <Text><![CDATA[XIC(Out.31)OTE(Sts_N);]]></Text>
+              </Rung>
+              <Rung Number="11" Type="N">
+                <Text><![CDATA[[XIC(Sts_N) ,GE(High,2048) ]OTE(Sts_V);]]></Text>
+              </Rung>
+              <Rung Number="12" Type="N">
+                <Text><![CDATA[XIO(Sts_C)EQ(Out,0)OTE(Sts_Z);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+        </Routines>
+      </AddOnInstructionDefinition>
+      <AddOnInstructionDefinition Name="AOI_SIM_RNG_Simple" Class="Standard" Revision="1.3" Vendor="Dr. Frank Jordan / Rockwell Automation" ExecutePrescan="true" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2013-06-09T12:25:48.173Z" CreatedBy="WIN-FJASSBQU6AJ\RA" EditedDate="2013-10-18T11:25:49.197Z" EditedBy="RA-INT\RdeRijke" SoftwareRevision="v20.01">
+        <Description><![CDATA[Simple Random Number Generator]]></Description>
+        <RevisionNote><![CDATA[This code is provided as application example without any warranty]]></RevisionNote>
+        <AdditionalHelpText><![CDATA[George Marsaglia 's MWC (multiply with carry) algorithm
+(taken from http://www.codeproject.com/Articles/25172/Simple-Random-Number-Generation)]]></AdditionalHelpText>
+        <Parameters>
+          <Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Input - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Output - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="Seed" TagType="Alias" Usage="Input" Radix="Decimal" AliasFor="LocalSeed" Required="false" Visible="true" ExternalAccess="Read Only" />
+          <Parameter Name="Count" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Number" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="TriggerSeed" TagType="Alias" Usage="Input" Radix="Decimal" AliasFor="LocalTriggerSeed" Required="false" Visible="true" ExternalAccess="Read Only" />
+          <Parameter Name="Reset" TagType="Alias" Usage="Input" Radix="Decimal" AliasFor="LocalReset" Required="false" Visible="true" ExternalAccess="Read Only" />
+        </Parameters>
+        <LocalTags>
+          <LocalTag Name="m_z" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="m_w" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="delta" DataType="REAL" Radix="Float" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="consB" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="consA" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="AOI_UMUL" DataType="UMUL" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[1,0,0,0,0,[0,0,0,0,0,0],[0,0,0,0,0,0],0,0,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Structure DataType="UMUL">
+                <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+                <DataValueMember Name="EnableOut" DataType="BOOL" Value="0" />
+                <DataValueMember Name="V1" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="V2" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="Sts_C" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Sts_N" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Sts_V" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Sts_Z" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Out" DataType="DINT" Radix="Decimal" Value="0" />
+              </Structure>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="u" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="AOI_UADD" DataType="UADD" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[1,0,0,0,0,0,0,0,0,0,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Structure DataType="UADD">
+                <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+                <DataValueMember Name="EnableOut" DataType="BOOL" Value="0" />
+                <DataValueMember Name="V1" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="V2" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="Out" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="Sts_C" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Sts_N" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Sts_V" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Sts_Z" DataType="BOOL" Value="0" />
+              </Structure>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="LocalTriggerSeed" DataType="BOOL" Radix="Decimal" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="LocalSeed" DataType="DINT" Radix="Decimal" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="LocalReset" DataType="BOOL" Radix="Decimal" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="tmp" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Overflow" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+        </LocalTags>
+        <Routines>
+          <Routine Name="Logic" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[XIC(Reset)CLR(Count)MOVE(521288629,LocalSeed)MOVE(LocalSeed,m_w)OTU(Reset);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[XIC(TriggerSeed)CLR(Count)MOVE(LocalSeed,m_w)OTU(TriggerSeed);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[EQ(Count,2147483647)MOVE(-1,Count)OTE(Overflow);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[XIO(Overflow)ADD(Count,1,Count);]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Comment><![CDATA[m_z = consA * (m_z & 0xffff) + (m_z >>16)]]></Comment>
+                <Text><![CDATA[MOVE(consA,AOI_UMUL.V1)CLR(AOI_UMUL.V2)MVM(m_z,65535,AOI_UMUL.V2)UMUL(AOI_UMUL);]]></Text>
+              </Rung>
+              <Rung Number="5" Type="N">
+                <Text><![CDATA[MOVE(AOI_UMUL.Out,AOI_UADD.V1)SWPB(m_z,WORD,tmp)CLR(AOI_UADD.V2)MVM(tmp,65535,AOI_UADD.V2)UADD(AOI_UADD)MOVE(AOI_UADD.Out,m_z);]]></Text>
+              </Rung>
+              <Rung Number="6" Type="N">
+                <Comment><![CDATA[m_z = consB * (m_w & 0xffff) + (m_w >>16)]]></Comment>
+                <Text><![CDATA[MOVE(consB,AOI_UMUL.V1)CLR(AOI_UMUL.V2)MVM(m_w,65535,AOI_UMUL.V2)UMUL(AOI_UMUL);]]></Text>
+              </Rung>
+              <Rung Number="7" Type="N">
+                <Text><![CDATA[MOVE(AOI_UMUL.Out,AOI_UADD.V1)SWPB(m_w,WORD,tmp)CLR(AOI_UADD.V2)MVM(tmp,65535,AOI_UADD.V2)UADD(AOI_UADD)MOVE(AOI_UADD.Out,m_w);]]></Text>
+              </Rung>
+              <Rung Number="8" Type="N">
+                <Comment><![CDATA[u = (m_z <<16) + m_w]]></Comment>
+                <Text><![CDATA[CLR(tmp)MVM(m_z,65535,tmp)SWPB(m_z,WORD,AOI_UADD.V1);]]></Text>
+              </Rung>
+              <Rung Number="9" Type="N">
+                <Text><![CDATA[MOVE(m_w,AOI_UADD.V2)UADD(AOI_UADD)MOVE(AOI_UADD.Out,u);]]></Text>
+              </Rung>
+              <Rung Number="10" Type="N">
+                <Text><![CDATA[XIC(AOI_UADD.Sts_N)OTU(u.31);]]></Text>
+              </Rung>
+              <Rung Number="11" Type="N">
+                <Text><![CDATA[ADD(u,1.0,Number)XIC(AOI_UADD.Sts_N)ADD(2.147483648e9,Number,Number);]]></Text>
+              </Rung>
+              <Rung Number="12" Type="N">
+                <Comment><![CDATA[Number = (u+1) * delta]]></Comment>
+                <Text><![CDATA[MUL(Number,delta,Number);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="Prescan" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[OTU(LocalTriggerSeed)OTU(LocalReset);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[MOVE(36969,consA)MOVE(18000,consB);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[CLR(Count)MOVE(521288629,LocalSeed);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[[EQ(m_w,0) ,EQ(m_z,0) ,EQ(delta,0.0) ][MOVE(LocalSeed,m_w) ,MOVE(362436069,m_z) ,MOVE(2.328306435454494e-10,delta) ];]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+        </Routines>
+        <Dependencies>
+          <Dependency Type="AddOnInstructionDefinition" Name="UADD" />
+          <Dependency Type="AddOnInstructionDefinition" Name="UMUL" />
+        </Dependencies>
+      </AddOnInstructionDefinition>
+      <AddOnInstructionDefinition Name="AOI_FaultGen" Class="Standard" Revision="1.2" Vendor="Rockwell Automation" ExecutePrescan="false" ExecutePostscan="false" ExecuteEnableInFalse="true" CreatedDate="2022-05-26T08:55:10.112Z" CreatedBy="RAW10-PZA01-VMG\pzaruba" EditedDate="2022-07-30T09:28:49.919Z" EditedBy="RAW10-PZA01-VMG\pzaruba" SoftwareRevision="v33.01">
+        <Description><![CDATA[Using random numbers [AOI_SIM_RNG_Simple] to generate 1-64 faults and their duration]]></Description>
+        <RevisionNote><![CDATA[Cfg_CycleTime changed to local tag (no need to have many configuration tags exposed)]]></RevisionNote>
+        <AdditionalHelpText><![CDATA[This AOI uses Random Number ganerator to create up to 64 different outputus (BOOLs), each with different duration.
+
+( Cfg_FaultOccurencesAll ) affects "probability" of TRUE value of all outputs ( F.x )
+( Cfg_FaultOccurences[x] ) can be used to set the ratio among "probabilities" of individual outputs ( F.x ) getting true -> higher value, haigher probability
+
+Mechanism:
+- Value of the random number is between 0 and 1
+- Random number is generated every ( Cfg_CycleTime ) seconds
+- Value of Random numebr is checked, whether it falls in interval [0 - Cfg_FaultOccurenceAll]
+- If Random number is in the configured interval, then this interval is split into pieces:
+   where number of pieces to "split the interval into" is:
+   SUM of ( Cfg_FaultOccurences[] ) ... the count of Cfg_FaultOccurences members to use is ( Cfg_NumberOfFaults )
+- Each "output" (F.x) then has its "own" interval of the [0 - Cfg_FaultOccurenceAll]. If the Random number falls into the interval related to F.x, then F.x is set high
+- Reset of F.x to low is after a random time between ( Cfg_FaultDurationMin ) and ( Cfg_FaultDurationMax )]]></AdditionalHelpText>
+        <Parameters>
+          <Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Input - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+            <Description><![CDATA[Enable Output - System Defined Parameter]]></Description>
+          </Parameter>
+          <Parameter Name="Cfg_NumberOfFaults" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="None">
+            <Description><![CDATA[Number of faults to be generated (valid 1-64)
+value 0 resets the F (output) bits]]></Description>
+            <DefaultData Format="L5K"><![CDATA[1]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="1" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Cfg_FaultOccurenceAll" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="None">
+            <Description><![CDATA[Probability of ANY fault occurence (valid 0-1)]]></Description>
+            <DefaultData Format="L5K"><![CDATA[5.00000000e-002]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.05" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Cfg_FaultDurationMin" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="None">
+            <Description><![CDATA[Minimum duration of fault [seconds]]]></Description>
+            <DefaultData Format="L5K"><![CDATA[15]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="15" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="Cfg_FaultDurationMax" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="None">
+            <Description><![CDATA[Maximum duration of fault [seconds]]]></Description>
+            <DefaultData Format="L5K"><![CDATA[75]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="75" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="F" TagType="Base" DataType="LINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="None">
+            <Description><![CDATA[Generated fault bits]]></Description>
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="LINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </Parameter>
+          <Parameter Name="RandomNr" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </Parameter>
+        </Parameters>
+        <LocalTags>
+          <LocalTag Name="TONs_FaultHold" DataType="TIMER" Dimensions="64" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Array DataType="TIMER" Dimensions="64">
+                <Element Index="[0]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[1]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[2]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[3]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[4]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[5]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[6]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[7]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[8]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[9]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[10]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[11]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[12]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[13]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[14]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[15]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[16]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[17]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[18]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[19]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[20]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[21]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[22]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[23]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[24]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[25]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[26]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[27]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[28]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[29]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[30]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[31]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[32]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[33]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[34]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[35]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[36]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[37]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[38]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[39]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[40]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[41]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[42]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[43]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[44]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[45]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[46]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[47]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[48]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[49]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[50]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[51]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[52]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[53]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[54]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[55]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[56]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[57]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[58]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[59]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[60]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[61]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[62]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+                <Element Index="[63]">
+                  <Structure DataType="TIMER">
+                    <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                    <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                    <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                  </Structure>
+                </Element>
+              </Array>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="z_CTRL" DataType="CONTROL" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[0,1,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Structure DataType="CONTROL">
+                <DataValueMember Name="LEN" DataType="DINT" Radix="Decimal" Value="1" />
+                <DataValueMember Name="POS" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                <DataValueMember Name="EU" DataType="BOOL" Value="0" />
+                <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+                <DataValueMember Name="EM" DataType="BOOL" Value="0" />
+                <DataValueMember Name="ER" DataType="BOOL" Value="0" />
+                <DataValueMember Name="UL" DataType="BOOL" Value="0" />
+                <DataValueMember Name="IN" DataType="BOOL" Value="0" />
+                <DataValueMember Name="FD" DataType="BOOL" Value="0" />
+              </Structure>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="RandomNumber" DataType="REAL" Radix="Float" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="TON_Cycle" DataType="TIMER" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[0,1500,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Structure DataType="TIMER">
+                <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="1500" />
+                <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="EN" DataType="BOOL" Value="0" />
+                <DataValueMember Name="TT" DataType="BOOL" Value="0" />
+                <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+              </Structure>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Wrk_FaultOccurencesSUM" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Wrk_Step" DataType="REAL" Radix="Float" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="i" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Wrk_StepLimit1" DataType="REAL" Radix="Float" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Wrk_StepLimit2" DataType="REAL" Radix="Float" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0.00000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="z_ONS" DataType="BOOL" Dimensions="64" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Array DataType="BOOL" Dimensions="64" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="0" />
+                <Element Index="[2]" Value="0" />
+                <Element Index="[3]" Value="0" />
+                <Element Index="[4]" Value="0" />
+                <Element Index="[5]" Value="0" />
+                <Element Index="[6]" Value="0" />
+                <Element Index="[7]" Value="0" />
+                <Element Index="[8]" Value="0" />
+                <Element Index="[9]" Value="0" />
+                <Element Index="[10]" Value="0" />
+                <Element Index="[11]" Value="0" />
+                <Element Index="[12]" Value="0" />
+                <Element Index="[13]" Value="0" />
+                <Element Index="[14]" Value="0" />
+                <Element Index="[15]" Value="0" />
+                <Element Index="[16]" Value="0" />
+                <Element Index="[17]" Value="0" />
+                <Element Index="[18]" Value="0" />
+                <Element Index="[19]" Value="0" />
+                <Element Index="[20]" Value="0" />
+                <Element Index="[21]" Value="0" />
+                <Element Index="[22]" Value="0" />
+                <Element Index="[23]" Value="0" />
+                <Element Index="[24]" Value="0" />
+                <Element Index="[25]" Value="0" />
+                <Element Index="[26]" Value="0" />
+                <Element Index="[27]" Value="0" />
+                <Element Index="[28]" Value="0" />
+                <Element Index="[29]" Value="0" />
+                <Element Index="[30]" Value="0" />
+                <Element Index="[31]" Value="0" />
+                <Element Index="[32]" Value="0" />
+                <Element Index="[33]" Value="0" />
+                <Element Index="[34]" Value="0" />
+                <Element Index="[35]" Value="0" />
+                <Element Index="[36]" Value="0" />
+                <Element Index="[37]" Value="0" />
+                <Element Index="[38]" Value="0" />
+                <Element Index="[39]" Value="0" />
+                <Element Index="[40]" Value="0" />
+                <Element Index="[41]" Value="0" />
+                <Element Index="[42]" Value="0" />
+                <Element Index="[43]" Value="0" />
+                <Element Index="[44]" Value="0" />
+                <Element Index="[45]" Value="0" />
+                <Element Index="[46]" Value="0" />
+                <Element Index="[47]" Value="0" />
+                <Element Index="[48]" Value="0" />
+                <Element Index="[49]" Value="0" />
+                <Element Index="[50]" Value="0" />
+                <Element Index="[51]" Value="0" />
+                <Element Index="[52]" Value="0" />
+                <Element Index="[53]" Value="0" />
+                <Element Index="[54]" Value="0" />
+                <Element Index="[55]" Value="0" />
+                <Element Index="[56]" Value="0" />
+                <Element Index="[57]" Value="0" />
+                <Element Index="[58]" Value="0" />
+                <Element Index="[59]" Value="0" />
+                <Element Index="[60]" Value="0" />
+                <Element Index="[61]" Value="0" />
+                <Element Index="[62]" Value="0" />
+                <Element Index="[63]" Value="0" />
+              </Array>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Random" DataType="AOI_SIM_RNG_Simple" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[[1,0,0.00000000e+000,0,0,0.00000000e+000,0,0,[1,0,0,0,0,[0,0,0,0,0,0],[0,0,0,0,0,0],0,0,0],0,[1,0,0,0,0,0,0,0,0,0,0],521288629,0]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Structure DataType="AOI_SIM_RNG_Simple">
+                <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+                <DataValueMember Name="EnableOut" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Seed" DataType="DINT" Radix="Decimal" Value="521288629" />
+                <DataValueMember Name="Count" DataType="DINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="Number" DataType="REAL" Radix="Float" Value="0.0" />
+                <DataValueMember Name="TriggerSeed" DataType="BOOL" Value="0" />
+                <DataValueMember Name="Reset" DataType="BOOL" Value="0" />
+              </Structure>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Cfg_FaultOccurences" DataType="DINT" Dimensions="64" Radix="Decimal" ExternalAccess="Read/Write">
+            <Description><![CDATA[Each fault's "probability weight" (proportional to the other faults' "weights")]]></Description>
+            <DefaultData Format="L5K"><![CDATA[[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <Array DataType="DINT" Dimensions="64" Radix="Decimal">
+                <Element Index="[0]" Value="100" />
+                <Element Index="[1]" Value="100" />
+                <Element Index="[2]" Value="100" />
+                <Element Index="[3]" Value="100" />
+                <Element Index="[4]" Value="100" />
+                <Element Index="[5]" Value="100" />
+                <Element Index="[6]" Value="100" />
+                <Element Index="[7]" Value="100" />
+                <Element Index="[8]" Value="100" />
+                <Element Index="[9]" Value="100" />
+                <Element Index="[10]" Value="100" />
+                <Element Index="[11]" Value="100" />
+                <Element Index="[12]" Value="100" />
+                <Element Index="[13]" Value="100" />
+                <Element Index="[14]" Value="100" />
+                <Element Index="[15]" Value="100" />
+                <Element Index="[16]" Value="100" />
+                <Element Index="[17]" Value="100" />
+                <Element Index="[18]" Value="100" />
+                <Element Index="[19]" Value="100" />
+                <Element Index="[20]" Value="100" />
+                <Element Index="[21]" Value="100" />
+                <Element Index="[22]" Value="100" />
+                <Element Index="[23]" Value="100" />
+                <Element Index="[24]" Value="100" />
+                <Element Index="[25]" Value="100" />
+                <Element Index="[26]" Value="100" />
+                <Element Index="[27]" Value="100" />
+                <Element Index="[28]" Value="100" />
+                <Element Index="[29]" Value="100" />
+                <Element Index="[30]" Value="100" />
+                <Element Index="[31]" Value="100" />
+                <Element Index="[32]" Value="100" />
+                <Element Index="[33]" Value="100" />
+                <Element Index="[34]" Value="100" />
+                <Element Index="[35]" Value="100" />
+                <Element Index="[36]" Value="100" />
+                <Element Index="[37]" Value="100" />
+                <Element Index="[38]" Value="100" />
+                <Element Index="[39]" Value="100" />
+                <Element Index="[40]" Value="100" />
+                <Element Index="[41]" Value="100" />
+                <Element Index="[42]" Value="100" />
+                <Element Index="[43]" Value="100" />
+                <Element Index="[44]" Value="100" />
+                <Element Index="[45]" Value="100" />
+                <Element Index="[46]" Value="100" />
+                <Element Index="[47]" Value="100" />
+                <Element Index="[48]" Value="100" />
+                <Element Index="[49]" Value="100" />
+                <Element Index="[50]" Value="100" />
+                <Element Index="[51]" Value="100" />
+                <Element Index="[52]" Value="100" />
+                <Element Index="[53]" Value="100" />
+                <Element Index="[54]" Value="100" />
+                <Element Index="[55]" Value="100" />
+                <Element Index="[56]" Value="100" />
+                <Element Index="[57]" Value="100" />
+                <Element Index="[58]" Value="100" />
+                <Element Index="[59]" Value="100" />
+                <Element Index="[60]" Value="100" />
+                <Element Index="[61]" Value="100" />
+                <Element Index="[62]" Value="100" />
+                <Element Index="[63]" Value="100" />
+              </Array>
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="i_max" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+            <DefaultData Format="L5K"><![CDATA[0]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </DefaultData>
+          </LocalTag>
+          <LocalTag Name="Cfg_CycleTime" DataType="REAL" Radix="Float" ExternalAccess="Read/Write">
+            <Description><![CDATA[Fault generation cycle time [seconds]]]></Description>
+            <DefaultData Format="L5K"><![CDATA[1.50000000e+000]]></DefaultData>
+            <DefaultData Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="1.5" />
+            </DefaultData>
+          </LocalTag>
+        </LocalTags>
+        <Routines>
+          <Routine Name="EnableInFalse" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[MOVE(0,F);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="Logic" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Comment><![CDATA["Sanity Check" 
+Make sure that the sizes  and other config values are correct]]></Comment>
+                <Text><![CDATA[[GT(Cfg_NumberOfFaults,64) MOVE(64,Cfg_NumberOfFaults) ,LT(Cfg_NumberOfFaults,0) CLR(Cfg_NumberOfFaults) ,LT(Cfg_CycleTime,0) MUL(Cfg_CycleTime,-1,Cfg_CycleTime) ,LT(Cfg_FaultDurationMin,0) MUL(Cfg_FaultDurationMin,-1,Cfg_FaultDurationMin) ,LT(Cfg_FaultDurationMax,0) MUL(Cfg_FaultDurationMax,-1,Cfg_FaultDurationMax) ];]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Comment><![CDATA[Clear the Random number "copy" that is being used in the fault generation - to ensure that the fault is really only triggered once
+Copy input Cfg_ data into approrpriate locations]]></Comment>
+                <Text><![CDATA[[CLR(RandomNumber) ,MUL(Cfg_CycleTime,1000,TON_Cycle.PRE) MOVE(Cfg_NumberOfFaults,z_CTRL.LEN) SUB(Cfg_NumberOfFaults,1,i_max) ];]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Comment><![CDATA[If there are no faults to be generated, there is no need to continue with the code execution]]></Comment>
+                <Text><![CDATA[LE(Cfg_NumberOfFaults,0)MOVE(0,F)TND();]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Comment><![CDATA[Only generate random number every X milisecond]]></Comment>
+                <Text><![CDATA[[XIO(TON_Cycle.DN) TON(TON_Cycle,?,?) ,XIC(TON_Cycle.DN) [AOI_SIM_RNG_Simple(Random) ,MOVE(Random.Number,RandomNumber) ] ];]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Comment><![CDATA[Calculate the "fraction" of [0-1] range for each fault = basically the "smallest step" to increment the limit interval
+only perform this recalculation once every "fault generation cycle"
+
+1) Sum up all the individual "probability ratios" of all faults
+2) check that the "Overall Fault Probability" is within the correct interval
+3) calculate the "smallest incrementation step" used for setting comparison limits]]></Comment>
+                <Text><![CDATA[XIC(TON_Cycle.DN)[CLR(Wrk_FaultOccurencesSUM) XIO(z_CTRL.DN) FAL(z_CTRL,?,?,ALL,Wrk_FaultOccurencesSUM,Wrk_FaultOccurencesSUM+Cfg_FaultOccurences[z_CTRL.POS]) ,LIMIT(1,Cfg_FaultOccurenceAll,0) MOVE(0.5,Cfg_FaultOccurenceAll) ,NE(Wrk_FaultOccurencesSUM,0) DIV(Cfg_FaultOccurenceAll,Wrk_FaultOccurencesSUM,Wrk_Step) ];]]></Text>
+              </Rung>
+              <Rung Number="5" Type="N">
+                <Comment><![CDATA[*********************************************************************************
+--> "loop" through the faults
+*********************************************************************************]]></Comment>
+                <Text><![CDATA[CLR(i)CLR(Wrk_StepLimit1);]]></Text>
+              </Rung>
+              <Rung Number="6" Type="N">
+                <Text><![CDATA[LBL(LOOP_Faults)NOP();]]></Text>
+              </Rung>
+              <Rung Number="7" Type="N">
+                <Comment><![CDATA[Fault generation
+
+1) compute the comparison limits
+2) if the current random number is within the limits, generate the fault]]></Comment>
+                <Text><![CDATA[[CPT(Wrk_StepLimit2,Wrk_StepLimit1 + Wrk_Step * Cfg_FaultOccurences[i]) ,GT(RandomNumber,Wrk_StepLimit1) LE(RandomNumber,Wrk_StepLimit2) OTL(F.[i]) ];]]></Text>
+              </Rung>
+              <Rung Number="8" Type="N">
+                <Comment><![CDATA[The actual upper limit of the fault's random number will become lower limit in the next cycle of the loop]]></Comment>
+                <Text><![CDATA[MOVE(Wrk_StepLimit2,Wrk_StepLimit1);]]></Text>
+              </Rung>
+              <Rung Number="9" Type="N">
+                <Comment><![CDATA[When the fault becomes active, set the Preset of the timer to a random value between Cfg_FaultDurationMin seconds and Cfg_FaultDurationMax seconds]]></Comment>
+                <Text><![CDATA[XIC(F.[i])ONS(z_ONS[i])[AOI_SIM_RNG_Simple(Random) ,CPT(TONs_FaultHold[i].PRE,(Random.Number * (Cfg_FaultDurationMax - Cfg_FaultDurationMin) + Cfg_FaultDurationMin) * 1000) ];]]></Text>
+              </Rung>
+              <Rung Number="10" Type="N">
+                <Comment><![CDATA[When the fault is active, run the timer
+And disable the fault when a preset period elapses
+]]></Comment>
+                <Text><![CDATA[XIC(F.[i])[TON(TONs_FaultHold[i],0,0) ,XIC(TONs_FaultHold[i].DN) OTU(F.[i]) ];]]></Text>
+              </Rung>
+              <Rung Number="11" Type="N">
+                <Comment><![CDATA[Next iteration of the loop
+or exit]]></Comment>
+                <Text><![CDATA[LT(i,i_max)ADD(i,1,i)JMP(LOOP_Faults);]]></Text>
+              </Rung>
+              <Rung Number="12" Type="N">
+                <Comment><![CDATA[Make the last result of Random Number call available to the "outside" (might be useful for some other fault generation procedures)]]></Comment>
+                <Text><![CDATA[MOVE(Random.Number,RandomNr);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+        </Routines>
+        <Dependencies>
+          <Dependency Type="AddOnInstructionDefinition" Name="AOI_SIM_RNG_Simple" />
+        </Dependencies>
+      </AddOnInstructionDefinition>
+    </AddOnInstructionDefinitions>
+    <Tags>
+      <Tag Name="Motors" Class="Standard" TagType="Base" DataType="Motor" Dimensions="5" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[[[-2.00000000e-001,-1,0,100,0],[-2.00000000e-001,-1,0,120,0],[-2.00000000e-001,-1,0,140,0],[-2.00000000e-001
+		,-1,0,160,0],[-2.00000000e-001,-1,0,180,0]]]]></Data>
+        <Data Format="Decorated">
+          <Array DataType="Motor" Dimensions="5">
+            <Element Index="[0]">
+              <Structure DataType="Motor">
+                <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+                <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+                <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+                <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="100" />
+                <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+              </Structure>
+            </Element>
+            <Element Index="[1]">
+              <Structure DataType="Motor">
+                <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+                <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+                <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+                <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="120" />
+                <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+              </Structure>
+            </Element>
+            <Element Index="[2]">
+              <Structure DataType="Motor">
+                <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+                <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+                <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+                <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="140" />
+                <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+              </Structure>
+            </Element>
+            <Element Index="[3]">
+              <Structure DataType="Motor">
+                <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+                <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+                <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+                <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="160" />
+                <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+              </Structure>
+            </Element>
+            <Element Index="[4]">
+              <Structure DataType="Motor">
+                <DataValueMember Name="Power" DataType="REAL" Radix="Float" Value="-0.2" />
+                <DataValueMember Name="Speed" DataType="INT" Radix="Decimal" Value="-1" />
+                <DataValueMember Name="CmdOffOn" DataType="BOOL" Value="0" />
+                <DataValueMember Name="SetSpeed" DataType="INT" Radix="Decimal" Value="180" />
+                <DataValueMember Name="Status" DataType="BOOL" Value="0" />
+              </Structure>
+            </Element>
+          </Array>
+        </Data>
+      </Tag>
+      <Tag Name="Tank1" Class="Standard" TagType="Base" DataType="TankUDT" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[[8,0.00000000e+000,5.00000000e+001]]]></Data>
+        <Data Format="Decorated">
+          <Structure DataType="TankUDT">
+            <DataValueMember Name="ValveInStatus" DataType="BOOL" Value="0" />
+            <DataValueMember Name="ValveInCmd" DataType="BOOL" Value="0" />
+            <DataValueMember Name="ValveOutStatus" DataType="BOOL" Value="0" />
+            <DataValueMember Name="ValveOutCmd" DataType="BOOL" Value="1" />
+            <DataValueMember Name="Level" DataType="REAL" Radix="Float" Value="0.0" />
+            <DataValueMember Name="SetPoint" DataType="REAL" Radix="Float" Value="50.0" />
+          </Structure>
+        </Data>
+      </Tag>
+      <Tag Name="Tank1_Level" Class="Standard" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank1_SetPoint" Class="Standard" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank1_ValveInCmd" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank1_ValveInStatus" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank1_ValveOutCmd" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank1_ValveOutStatus" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank2" Class="Standard" TagType="Base" DataType="TankUDT" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[[0,0.00000000e+000,5.00000000e+001]]]></Data>
+        <Data Format="Decorated">
+          <Structure DataType="TankUDT">
+            <DataValueMember Name="ValveInStatus" DataType="BOOL" Value="0" />
+            <DataValueMember Name="ValveInCmd" DataType="BOOL" Value="0" />
+            <DataValueMember Name="ValveOutStatus" DataType="BOOL" Value="0" />
+            <DataValueMember Name="ValveOutCmd" DataType="BOOL" Value="0" />
+            <DataValueMember Name="Level" DataType="REAL" Radix="Float" Value="0.0" />
+            <DataValueMember Name="SetPoint" DataType="REAL" Radix="Float" Value="50.0" />
+          </Structure>
+        </Data>
+      </Tag>
+      <Tag Name="Tank2_Level" Class="Standard" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank2_SetPoint" Class="Standard" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank2_ValveInCmd" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank2_ValveInStatus" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank2_ValveOutCmd" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="Tank2_ValveOutStatus" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[0]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+        </Data>
+      </Tag>
+      <Tag Name="TestBoolTag" Class="Standard" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[1]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="BOOL" Radix="Decimal" Value="1" />
+        </Data>
+      </Tag>
+      <Tag Name="TestIncrementTag" Class="Standard" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+        <Data Format="L5K"><![CDATA[91]]></Data>
+        <Data Format="Decorated">
+          <DataValue DataType="DINT" Radix="Decimal" Value="91" />
+        </Data>
+      </Tag>
+    </Tags>
+    <Programs>
+      <Program Name="BoilerDemoProgram" TestEdits="false" MainRoutineName="BoilerDemoRoutine" Disabled="false" Class="Standard" UseAsFolder="false">
+        <Tags>
+          <Tag Name="Count" TagType="Base" DataType="INT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[5]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="INT" Radix="Decimal" Value="5" />
+            </Data>
+          </Tag>
+          <Tag Name="Direction" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[1]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="1" />
+            </Data>
+          </Tag>
+          <Tag Name="Init" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[1]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="1" />
+            </Data>
+          </Tag>
+        </Tags>
+        <Routines>
+          <Routine Name="BoilerDemoRoutine" Type="ST">
+            <STContent>
+              <Line Number="0"><![CDATA[//Init Motors and WaterTank]]></Line>
+              <Line Number="1"><![CDATA[if (not Init) then]]></Line>
+              <Line Number="2"><![CDATA[	Init := 1;]]></Line>
+              <Line Number="3"><![CDATA[	Motors[0].SetSpeed := 100;]]></Line>
+              <Line Number="4"><![CDATA[	Motors[1].SetSpeed := 120;]]></Line>
+              <Line Number="5"><![CDATA[	Motors[2].SetSpeed := 140;]]></Line>
+              <Line Number="6"><![CDATA[	Motors[3].SetSpeed := 160;]]></Line>
+              <Line Number="7"><![CDATA[	Motors[4].SetSpeed := 180;]]></Line>
+              <Line Number="8"><![CDATA[	Tank2.SetPoint := 50.0;]]></Line>
+              <Line Number="9"><![CDATA[	Tank1.SetPoint := 50.0;]]></Line>
+              <Line Number="10"><![CDATA[	Tank2.Level := 1;]]></Line>
+              <Line Number="11"><![CDATA[	Tank1.Level := 1;]]></Line>
+              <Line Number="12"><![CDATA[end_if;]]></Line>
+              <Line Number="13"><![CDATA[]]></Line>
+              <Line Number="14"><![CDATA[if (TestIncrementTag = 0) then]]></Line>
+              <Line Number="15"><![CDATA[	Direction := 1;]]></Line>
+              <Line Number="16"><![CDATA[end_if;]]></Line>
+              <Line Number="17"><![CDATA[if (TestIncrementTag = 100) then]]></Line>
+              <Line Number="18"><![CDATA[	Direction := 0;]]></Line>
+              <Line Number="19"><![CDATA[end_if;]]></Line>
+              <Line Number="20"><![CDATA[if (TestBoolTag) then]]></Line>
+              <Line Number="21"><![CDATA[	if (Direction) then ]]></Line>
+              <Line Number="22"><![CDATA[		TestIncrementTag := TestIncrementTag + 1;]]></Line>
+              <Line Number="23"><![CDATA[	else]]></Line>
+              <Line Number="24"><![CDATA[		TestIncrementTag := TestIncrementTag - 1;]]></Line>
+              <Line Number="25"><![CDATA[	end_if;]]></Line>
+              <Line Number="26"><![CDATA[end_if;]]></Line>
+              <Line Number="27"><![CDATA[]]></Line>
+              <Line Number="28"><![CDATA[]]></Line>
+              <Line Number="29"><![CDATA[//Motor Logic]]></Line>
+              <Line Number="30"><![CDATA[for Count := 0 to 4 do]]></Line>
+              <Line Number="31"><![CDATA[	if (Motors[Count].CmdOffOn) then]]></Line>
+              <Line Number="32"><![CDATA[		Motors[Count].Status := 1;]]></Line>
+              <Line Number="33"><![CDATA[		if (Motors[Count].Speed <= Motors[Count].SetSpeed) then]]></Line>
+              <Line Number="34"><![CDATA[			Motors[Count].Speed := Motors[Count].Speed + 1;]]></Line>
+              <Line Number="35"><![CDATA[			Motors[Count].Power := Motors[Count].Power + 0.2;]]></Line>
+              <Line Number="36"><![CDATA[		end_if;]]></Line>
+              <Line Number="37"><![CDATA[	else]]></Line>
+              <Line Number="38"><![CDATA[		Motors[Count].Status := 0;]]></Line>
+              <Line Number="39"><![CDATA[		if (Motors[Count].Speed >= 0) then]]></Line>
+              <Line Number="40"><![CDATA[			Motors[Count].Speed := Motors[Count].Speed - 1;]]></Line>
+              <Line Number="41"><![CDATA[			Motors[Count].Power := Motors[Count].Power - 0.2;]]></Line>
+              <Line Number="42"><![CDATA[		end_if;]]></Line>
+              <Line Number="43"><![CDATA[	end_if;]]></Line>
+              <Line Number="44"><![CDATA[end_for;]]></Line>
+              <Line Number="45"><![CDATA[]]></Line>
+            </STContent>
+          </Routine>
+        </Routines>
+      </Program>
+      <Program Name="OvenDemo" TestEdits="false" MainRoutineName="MainRoutine" Disabled="false" Class="Standard" UseAsFolder="false">
+        <Tags>
+          <Tag Name="ActualDuration" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[71]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="71" />
+            </Data>
+          </Tag>
+          <Tag Name="ActualDuration_F" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Description><![CDATA[Actual Duration (Phases)]]></Description>
+            <Comments>
+              <Comment Operand="[0]"><![CDATA[DO NOT USE]]></Comment>
+            </Comments>
+            <Data Format="L5K"><![CDATA[[0,15,30,25]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="4" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="15" />
+                <Element Index="[2]" Value="30" />
+                <Element Index="[3]" Value="25" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="ActualPhase" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="ActualSetpoint" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Description><![CDATA[Actual temperature setpoint (for current phase)]]></Description>
+            <Data Format="L5K"><![CDATA[120]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="120" />
+            </Data>
+          </Tag>
+          <Tag Name="ActualTemperature" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[1.11700438e-037]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="1.11700438e-037" />
+            </Data>
+          </Tag>
+          <Tag Name="Count" TagType="Base" DataType="INT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="INT" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="CycleNumber" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[33]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="33" />
+            </Data>
+          </Tag>
+          <Tag Name="Direction" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="DoorAlarm" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="FanAlarm" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="FilterAlarm" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="Gas" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[5.62167866e-003]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="5.62167866e-003" />
+            </Data>
+          </Tag>
+          <Tag Name="GasThrottle" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </Data>
+          </Tag>
+          <Tag Name="Init" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="JobFinish" TagType="Base" DataType="DATETIMESTRUCT" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[[1998,3,8,23,47,56,247241]]]></Data>
+            <Data Format="Decorated">
+              <Structure DataType="DATETIMESTRUCT">
+                <DataValueMember Name="Year" DataType="DINT" Radix="Decimal" Value="1998" />
+                <DataValueMember Name="Month" DataType="DINT" Radix="Decimal" Value="3" />
+                <DataValueMember Name="Day" DataType="DINT" Radix="Decimal" Value="8" />
+                <DataValueMember Name="Hour" DataType="DINT" Radix="Decimal" Value="23" />
+                <DataValueMember Name="Minute" DataType="DINT" Radix="Decimal" Value="47" />
+                <DataValueMember Name="Second" DataType="DINT" Radix="Decimal" Value="56" />
+                <DataValueMember Name="Microsecond" DataType="DINT" Radix="Decimal" Value="247241" />
+              </Structure>
+            </Data>
+          </Tag>
+          <Tag Name="JobGas" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[5.62167866e-003]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="5.62167866e-003" />
+            </Data>
+          </Tag>
+          <Tag Name="JobkWh" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[4.51027267e-002]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.045102727" />
+            </Data>
+          </Tag>
+          <Tag Name="JobRecipe" TagType="Base" DataType="STRING" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[[0,'$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
+		]]]></Data>
+            <Data Format="String" Length="0"><![CDATA['']]></Data>
+          </Tag>
+          <Tag Name="JobStart" TagType="Base" DataType="DATETIMESTRUCT" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[[1998,3,8,23,46,46,16656]]]></Data>
+            <Data Format="Decorated">
+              <Structure DataType="DATETIMESTRUCT">
+                <DataValueMember Name="Year" DataType="DINT" Radix="Decimal" Value="1998" />
+                <DataValueMember Name="Month" DataType="DINT" Radix="Decimal" Value="3" />
+                <DataValueMember Name="Day" DataType="DINT" Radix="Decimal" Value="8" />
+                <DataValueMember Name="Hour" DataType="DINT" Radix="Decimal" Value="23" />
+                <DataValueMember Name="Minute" DataType="DINT" Radix="Decimal" Value="46" />
+                <DataValueMember Name="Second" DataType="DINT" Radix="Decimal" Value="46" />
+                <DataValueMember Name="Microsecond" DataType="DINT" Radix="Decimal" Value="16656" />
+              </Structure>
+            </Data>
+          </Tag>
+          <Tag Name="kW" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[3.00000000e+000]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="3.0" />
+            </Data>
+          </Tag>
+          <Tag Name="kWh" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[4.51027267e-002]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.045102727" />
+            </Data>
+          </Tag>
+          <Tag Name="Preheating" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="RecipeName" TagType="Base" DataType="STRING" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoint: Recipe Name]]></Description>
+            <Data Format="L5K"><![CDATA[[0,'$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
+		]]]></Data>
+            <Data Format="String" Length="0"><![CDATA['']]></Data>
+          </Tag>
+          <Tag Name="ResetFilter" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Comand to reset filter]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="Running" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Description><![CDATA[Status: Sequence is Running]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="SET_Duration_F" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoints: Duratino of phases]]></Description>
+            <Comments>
+              <Comment Operand="[0]"><![CDATA[DO NOT USE]]></Comment>
+            </Comments>
+            <Data Format="L5K"><![CDATA[[0,15,30,25]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="4" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="15" />
+                <Element Index="[2]" Value="30" />
+                <Element Index="[3]" Value="25" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="SET_FilterLimit" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoint: Filter Lifetime]]></Description>
+            <Data Format="L5K"><![CDATA[500]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="500" />
+            </Data>
+          </Tag>
+          <Tag Name="SET_PreheatingTemperature" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoint: Preheating Temperature ]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="SET_SpeedFanInput_F" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoints: Fan Speed on Input]]></Description>
+            <Comments>
+              <Comment Operand="[0]"><![CDATA[DO NOT USE]]></Comment>
+            </Comments>
+            <Data Format="L5K"><![CDATA[[0,10,20,50]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="4" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="10" />
+                <Element Index="[2]" Value="20" />
+                <Element Index="[3]" Value="50" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="SET_SpeedFanOutput_F" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoints: Fan Speeds on Output]]></Description>
+            <Comments>
+              <Comment Operand="[0]"><![CDATA[DO NOT USE]]></Comment>
+            </Comments>
+            <Data Format="L5K"><![CDATA[[0,15,15,50]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="4" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="15" />
+                <Element Index="[2]" Value="15" />
+                <Element Index="[3]" Value="50" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="SET_TemperatureSetpoint_F" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Description><![CDATA[Setpoints: Temperatures in different phases]]></Description>
+            <Comments>
+              <Comment Operand="[0]"><![CDATA[DO NOT USE]]></Comment>
+            </Comments>
+            <Data Format="L5K"><![CDATA[[0,250,270,120]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="4" Radix="Decimal">
+                <Element Index="[0]" Value="0" />
+                <Element Index="[1]" Value="250" />
+                <Element Index="[2]" Value="270" />
+                <Element Index="[3]" Value="120" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="SpeedFanInput" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Description><![CDATA[Actual Speed: Input Fan]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="SpeedFanOutput" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Description><![CDATA[Actual Speed: Output Fan]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="StartStop" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="TemperatureAlarm" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="TimeToFinishAll" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[-1]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="-1" />
+            </Data>
+          </Tag>
+          <Tag Name="TimeToFinishPhase" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="TotEE" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[5.50184906e-001]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.5501849" />
+            </Data>
+          </Tag>
+          <Tag Name="TotLPG" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[1.91046953e-001]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.19104695" />
+            </Data>
+          </Tag>
+          <Tag Name="UseMinute" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[500]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="500" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_Gas_change" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_interval" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Description><![CDATA[Interval between scans (seconds)]]></Description>
+            <Data Format="L5K"><![CDATA[24]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="DINT" Radix="Decimal" Value="24" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_interval_CSTactual" TagType="Base" DataType="DINT" Dimensions="2" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[[190188671,2]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="2" Radix="Decimal">
+                <Element Index="[0]" Value="190188671" />
+                <Element Index="[1]" Value="2" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="WRK_interval_CSTprevious" TagType="Base" DataType="DINT" Dimensions="2" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[[190188671,0]]]></Data>
+            <Data Format="Decorated">
+              <Array DataType="DINT" Dimensions="2" Radix="Decimal">
+                <Element Index="[0]" Value="190188671" />
+                <Element Index="[1]" Value="0" />
+              </Array>
+            </Data>
+          </Tag>
+          <Tag Name="WRK_kWh_change" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[2.08333338e-004]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="2.08333338e-004" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_TemperatureSetpoint" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_throttle" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[0.00000000e+000]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="0.0" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_TimeToFinishAll" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[-1.04613185e+000]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="-1.0461318" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_TimeToFinishPhase" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[-1.29492091e-005]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="-1.29492091e-005" />
+            </Data>
+          </Tag>
+          <Tag Name="WRK_useMinute" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[4.99500000e+008]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="REAL" Radix="Float" Value="499500000.0" />
+            </Data>
+          </Tag>
+          <Tag Name="zCTRL_Alarms" TagType="Base" DataType="AOI_FaultGen" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Comments>
+              <Comment Operand=".F.0"><![CDATA[Temperature Alarm]]></Comment>
+              <Comment Operand=".F.1"><![CDATA[Fan Alarm]]></Comment>
+              <Comment Operand=".F.2"><![CDATA[Door Alarm]]></Comment>
+            </Comments>
+            <Data Format="L5K"><![CDATA[[3,3,5.00000000e-002,1,5,0,8.91879200e-001,[[3406987,4847,0],[2636141,3403,0],[3384623,4983,0],[0,0,0],[0,0,0],[0,0,0],[0
+		,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0
+		,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0
+		,0,0],[0,0,0],[0,0,0],[0,0,0]],[0,3,0],0.00000000e+000,[-1070322085,1500,1099],300,1.66666665e-004,2,4.99999970e-002
+		,4.99999970e-002,[2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0
+		,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0
+		,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0,2#0],[0,27,8.91879200e-001,2070459493,804042358
+		,2.32830644e-010,18000,36969,[3,18000,44669,804042000,0,[1616,1661,8,21,0,0],[2684176,33936,13288,168,0,0
+		],0,48534,191],1683108318,[27,-1268417688,804042358,-464375330,46181,31592,12268,46710,78302,58450
+		,58450],521288629,46181],[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
+		,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100
+		,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],2,1.50000000e+000]]]></Data>
+            <Data Format="Decorated">
+              <Structure DataType="AOI_FaultGen">
+                <DataValueMember Name="EnableIn" DataType="BOOL" Value="1" />
+                <DataValueMember Name="EnableOut" DataType="BOOL" Value="1" />
+                <DataValueMember Name="Cfg_NumberOfFaults" DataType="DINT" Radix="Decimal" Value="3" />
+                <DataValueMember Name="Cfg_FaultOccurenceAll" DataType="REAL" Radix="Float" Value="0.05" />
+                <DataValueMember Name="Cfg_FaultDurationMin" DataType="DINT" Radix="Decimal" Value="1" />
+                <DataValueMember Name="Cfg_FaultDurationMax" DataType="DINT" Radix="Decimal" Value="5" />
+                <DataValueMember Name="F" DataType="LINT" Radix="Decimal" Value="0" />
+                <DataValueMember Name="RandomNr" DataType="REAL" Radix="Float" Value="0.8918792" />
+              </Structure>
+            </Data>
+          </Tag>
+          <Tag Name="zCTRL_Finished_STOP" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Description><![CDATA[All phases finished, stop the sequence]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="zCTRL_FirstRunBit" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Description><![CDATA[First run after START command]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="zCTRL_SetPointPhase" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Description><![CDATA[Switch between phases]]></Description>
+            <Data Format="L5K"><![CDATA[0]]></Data>
+            <Data Format="Decorated">
+              <DataValue DataType="BOOL" Radix="Decimal" Value="0" />
+            </Data>
+          </Tag>
+          <Tag Name="zCTRL_Timer" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="None" OpcUaAccess="None">
+            <Data Format="L5K"><![CDATA[[-1070322095,250,89]]]></Data>
+            <Data Format="Decorated">
+              <Structure DataType="TIMER">
+                <DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="250" />
+                <DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="89" />
+                <DataValueMember Name="EN" DataType="BOOL" Value="1" />
+                <DataValueMember Name="TT" DataType="BOOL" Value="1" />
+                <DataValueMember Name="DN" DataType="BOOL" Value="0" />
+              </Structure>
+            </Data>
+          </Tag>
+        </Tags>
+        <Routines>
+          <Routine Name="Alarms" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Comment><![CDATA[Lines 115 - 121 of C#]]></Comment>
+                <Text><![CDATA[GT(UseMinute,SET_FilterLimit)OTE(FilterAlarm);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[XIC(zCTRL_Alarms.F.0)OTE(TemperatureAlarm);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[XIC(zCTRL_Alarms.F.1)OTE(FanAlarm);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[XIC(zCTRL_Alarms.F.2)OTE(DoorAlarm);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="MainRoutine" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Comment><![CDATA[START the oven
+
+Lines 123 - 133 of C# [ the "entry" condition = private void StartStop_VariableChange( ... ]
+Lines 152 - 165 [ ResetOven() ]
+Lines 298 - 311 [ StartOven() ]]]></Comment>
+                <Text><![CDATA[XIO(Running)XIC(StartStop)[CLR(ActualDuration_F[1]) CLR(ActualDuration_F[2]) CLR(ActualDuration_F[3]) CLR(ActualDuration) ,CLR(SpeedFanInput) CLR(SpeedFanOutput) CLR(WRK_TimeToFinishAll) ,CLR(Gas) CLR(kWh) ,GSV(WallClockTime,,DateTime,JobStart.Year) MOVE(RecipeName,JobRecipe) ,ADD(WRK_TimeToFinishAll,SET_Duration_F[1],WRK_TimeToFinishAll) ADD(WRK_TimeToFinishAll,SET_Duration_F[2],WRK_TimeToFinishAll) ADD(WRK_TimeToFinishAll,SET_Duration_F[3],WRK_TimeToFinishAll) ,MOVE(1,ActualPhase) OTL(zCTRL_SetPointPhase) OTL(zCTRL_FirstRunBit) ,OTL(Running) ];]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Comment><![CDATA[STOP the oven
+
+Lines 123 - 133 of C# [ the "entry" condition = private void StartStop_VariableChange( ... ]
+Lines 139 - 150 of C# [ private void StopOven() ]]]></Comment>
+                <Text><![CDATA[XIC(Running)[XIO(StartStop) ,XIC(zCTRL_Finished_STOP) ][CLR(ActualPhase) CLR(SpeedFanInput) CLR(SpeedFanOutput) ,CPT(kWh,kWh + (kWh * SET_Duration_F[3]) / 3600) ,MOVE(Gas,JobGas) MOVE(kWh,JobkWh) ,OTU(Running) ,OTU(StartStop) ,OTU(zCTRL_Finished_STOP) ];]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[XIC(Running)JSR(OvenLogic,0);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Comment><![CDATA[Generates a random number every 1.5 seconds
+If the random number is between 0.0 and 0.05, then the interval is "split" in three ( Cfg_NumberOfFaults ) and one of the three outputs is set.
+Reset back to zero after a time between 1 and 5 seconds ( Cfg_FaultDurationMin, Cfg_FaultDurationMax )]]></Comment>
+                <Text><![CDATA[AOI_FaultGen(zCTRL_Alarms);]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Text><![CDATA[XIC(Running)JSR(Alarms,0);]]></Text>
+              </Rung>
+              <Rung Number="5" Type="N">
+                <Comment><![CDATA[Execute "Oven Temperature Simulation" every 250 ms
+
+Lines 111 - 112 of C#]]></Comment>
+                <Text><![CDATA[[MOVE(250,zCTRL_Timer.PRE) ,XIO(zCTRL_Timer.DN) TON(zCTRL_Timer,?,?) ,XIC(zCTRL_Timer.DN) JSR(OvenTemperature,0) ];]]></Text>
+              </Rung>
+              <Rung Number="6" Type="N">
+                <Comment><![CDATA[Reset the filter use timer
+
+Lines 391- 395 of C#   [  public void ResetFilter()  ]]]></Comment>
+                <Text><![CDATA[XIC(ResetFilter)[CLR(WRK_useMinute) CLR(UseMinute) ,OTU(ResetFilter) ];]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="OvenLogic" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Comment><![CDATA[Switch to next phase
+
+Lines 167 - 206 of C# [ part of private void SetPointPhase(int phase) ]]]></Comment>
+                <Text><![CDATA[XIC(zCTRL_SetPointPhase)LT(ActualPhase,4)[MOVE(SET_SpeedFanInput_F[ActualPhase],SpeedFanInput) MOVE(SET_SpeedFanOutput_F[ActualPhase],SpeedFanOutput) ,MOVE(SET_Duration_F[ActualPhase],WRK_TimeToFinishPhase) MOVE(SET_TemperatureSetpoint_F[ActualPhase],ActualSetpoint) ,GT(ActualPhase,1) CPT(kWh,kWh + (kW * SET_Duration_F[ActualPhase-1]) / 3600) ,CPT(kW,3 * (SpeedFanInput / 100) + 3 * (SpeedFanOutput / 100)) ,OTU(zCTRL_SetPointPhase) ];]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Comment><![CDATA[Get a timestamp (to record duration of scan for "timing")]]></Comment>
+                <Text><![CDATA[[GSV(CST,,CurrentValue,WRK_interval_CSTactual[0]) ,XIC(zCTRL_FirstRunBit) COP(WRK_interval_CSTactual[0],WRK_interval_CSTprevious[0],1) OTU(zCTRL_FirstRunBit) ,SUB(WRK_interval_CSTactual[0],WRK_interval_CSTprevious[0],WRK_interval) ];]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Comment><![CDATA[Calculate the times
+
+Wehn the time of the phase is done -> switch to another phase
+
+Lines 230 - 246 of C# [ OvenLogic() ]
+Lines 279 - 292 of C#  [ OvenLogic() ]]]></Comment>
+                <Text><![CDATA[[[CPT(WRK_TimeToFinishPhase,WRK_TimeToFinishPhase - (WRK_interval / 1000000)) CPT(WRK_TimeToFinishAll,WRK_TimeToFinishAll - (WRK_interval / 1000000)) ,MOVE(WRK_TimeToFinishPhase,TimeToFinishPhase) MOVE(WRK_TimeToFinishAll,TimeToFinishAll) CPT(ActualDuration,SET_Duration_F[1] + SET_Duration_F[2] + SET_Duration_F[3] - WRK_TimeToFinishAll) ] ,LE(WRK_TimeToFinishPhase,0) [MOVE(SET_Duration_F[ActualPhase],ActualDuration_F[ActualPhase]) ,ADD(ActualPhase,1,ActualPhase) OTL(zCTRL_SetPointPhase) ] ,GT(WRK_TimeToFinishPhase,0) SUB(SET_Duration_F[ActualPhase],TimeToFinishPhase,ActualDuration_F[ActualPhase]) ];]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[COP(WRK_interval_CSTactual[0],WRK_interval_CSTprevious[0],1);]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Comment><![CDATA[Filter use timer
+
+Lines 274, 275 of C#  [ OvenLogic() ]]]></Comment>
+                <Text><![CDATA[LT(UseMinute,SET_FilterLimit)ADD(WRK_useMinute,WRK_interval,WRK_useMinute)DIV(WRK_useMinute,1000000,UseMinute);]]></Text>
+              </Rung>
+              <Rung Number="5" Type="N">
+                <Comment><![CDATA[End the sequence (after the last phase is ended)
+
+Lines 212 - 217 and 221 of C# [ part of private void SetPointPhase(int phase) ]]]></Comment>
+                <Text><![CDATA[XIC(zCTRL_SetPointPhase)GE(ActualPhase,4)[ADD(CycleNumber,1,CycleNumber) ,GSV(WallClockTime,,DateTime,JobFinish.Year) ,OTU(zCTRL_SetPointPhase) ,OTL(zCTRL_Finished_STOP) ];]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="OvenTemperature" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Comment><![CDATA[Lines 356, 317 and 337 of C#]]></Comment>
+                <Text><![CDATA[[XIO(Running) XIO(Preheating) CLR(WRK_TemperatureSetpoint) ,XIC(Running) MOVE(ActualSetpoint,WRK_TemperatureSetpoint) ,XIC(Preheating) MOVE(SET_PreheatingTemperature,WRK_TemperatureSetpoint) ];]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Comment><![CDATA["Throttle logic"
+
+Lines 317-18, 321-326, 337-345 of C#   [ UpdateOvenTemperature() ]]]></Comment>
+                <Text><![CDATA[[CPT(WRK_throttle,10 - (1 - (WRK_TemperatureSetpoint - ActualTemperature) / 40) * 10) ,GE(ActualTemperature,WRK_TemperatureSetpoint) CLR(WRK_throttle) ,CMP(WRK_TemperatureSetpoint - ActualTemperature > 40) MOVE(10,WRK_throttle) ];]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Comment><![CDATA[Temperature "Simulation"
+
+Lines 328-336, 347-366 of C#  [ UpdateOvenTemperature() ]]]></Comment>
+                <Text><![CDATA[NE(ActualTemperature,WRK_TemperatureSetpoint)CPT(ActualTemperature,ActualTemperature + (WRK_TemperatureSetpoint - ActualTemperature) * 0.1);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[MOVE(WRK_throttle,GasThrottle);]]></Text>
+              </Rung>
+              <Rung Number="4" Type="N">
+                <Comment><![CDATA[Gas and electricity consumption
+
+Lines 319, 370-376, 385-389 of C#]]></Comment>
+                <Text><![CDATA[XIC(Running)[CPT(WRK_kWh_change,(kW * zCTRL_Timer.PRE/1000) / 3600) ADD(kWh,WRK_kWh_change,kWh) ADD(TotEE,WRK_kWh_change,TotEE) ,CPT(WRK_Gas_change,((GasThrottle * zCTRL_Timer.PRE/1000) / 3600) / 4) ADD(Gas,WRK_Gas_change,Gas) ADD(TotLPG,WRK_Gas_change,TotLPG) ];]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+        </Routines>
+      </Program>
+      <Program Name="SafetyProgram" TestEdits="false" Disabled="false" Class="Safety" UseAsFolder="false">
+        <Tags />
+        <Routines />
+      </Program>
+      <Program Name="TankLogic" TestEdits="false" MainRoutineName="MainRoutine" Disabled="false" Class="Standard" UseAsFolder="false">
+        <Tags />
+        <Routines>
+          <Routine Name="MainRoutine" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[JSR(Tank1,0);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[JSR(Tank2,0);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="Tank1" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[XIC(Tank1_ValveInCmd)LT(Tank1_Level,Tank1_SetPoint)OTE(Tank1_ValveInStatus);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[XIC(Tank1_ValveOutCmd)GE(Tank1.Level,1)OTE(Tank1_ValveOutStatus);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[XIC(Tank1_ValveInStatus)ADD(Tank1_Level,1,Tank1_Level);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[XIC(Tank1_ValveOutStatus)SUB(Tank1_Level,1,Tank1_Level);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="Tank2" Type="RLL">
+            <RLLContent>
+              <Rung Number="0" Type="N">
+                <Text><![CDATA[XIC(Tank2_ValveInCmd)LT(Tank2_Level,Tank2_SetPoint)OTE(Tank2_ValveInStatus);]]></Text>
+              </Rung>
+              <Rung Number="1" Type="N">
+                <Text><![CDATA[XIC(Tank2_ValveOutCmd)GE(Tank2_Level,1)OTE(Tank2_ValveOutStatus);]]></Text>
+              </Rung>
+              <Rung Number="2" Type="N">
+                <Text><![CDATA[XIC(Tank2_ValveInStatus)ADD(Tank2_Level,1,Tank2_Level);]]></Text>
+              </Rung>
+              <Rung Number="3" Type="N">
+                <Text><![CDATA[XIC(Tank2_ValveOutStatus)SUB(Tank2_Level,1,Tank2_Level);]]></Text>
+              </Rung>
+            </RLLContent>
+          </Routine>
+          <Routine Name="test" Type="RLL" />
+        </Routines>
+      </Program>
+    </Programs>
+    <Tasks>
+      <Task Name="BoilerDemoTask" Type="PERIODIC" Rate="75" Priority="10" Watchdog="500" DisableUpdateOutputs="false" InhibitTask="false" Class="Standard" SynchronizeRedundancyDataDisabled="false">
+        <ScheduledPrograms>
+          <ScheduledProgram Name="BoilerDemoProgram" />
+          <ScheduledProgram Name="TankLogic" />
+        </ScheduledPrograms>
+      </Task>
+      <Task Name="OvenDemoTask" Type="CONTINUOUS" Priority="10" Watchdog="500" DisableUpdateOutputs="false" InhibitTask="false" Class="Standard" SynchronizeRedundancyDataDisabled="false">
+        <ScheduledPrograms>
+          <ScheduledProgram Name="OvenDemo" />
+        </ScheduledPrograms>
+      </Task>
+      <Task Name="SafetyTask" Type="PERIODIC" Rate="20" Priority="10" Watchdog="20" DisableUpdateOutputs="false" InhibitTask="false" Class="Safety">
+        <ScheduledPrograms>
+          <ScheduledProgram Name="SafetyProgram" />
+        </ScheduledPrograms>
+      </Task>
+    </Tasks>
+    <CST MasterID="0" />
+    <WallClockTime LocalTimeAdjustment="0" TimeZone="0" />
+    <Trends />
+    <TimeSynchronize Priority1="128" Priority2="128" PTPEnable="false" />
+    <EthernetPorts>
+      <EthernetPort Port="1" Label="1" PortEnabled="true" />
+    </EthernetPorts>
+    <OpcUaInfo EnabledPorts="" />
+  </Controller>
+</RSLogix5000Content>

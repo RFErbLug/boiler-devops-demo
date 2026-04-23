@@ -1,0 +1,138 @@
+pipeline {
+    agent any
+
+    options {
+        disableConcurrentBuilds()
+        timestamps()
+    }
+
+    parameters {
+        booleanParam(
+            name: 'RUN_LOGIX_BUILD_STAGES',
+            defaultValue: false,
+            description: 'Run implode and L5X-to-ACD stages'
+        )
+    }
+
+    environment {
+        EXPLODED_DIR        = '01-vcs/exploded-content'
+        GENERATED_L5X_DIR   = '02-ci/generated/l5x'
+        GENERATED_ACD_DIR   = '02-ci/generated/acd'
+        SCRIPT_DIR          = '02-ci/pipeline-scripts'
+        HARNESS_DIR         = '02-ci/test-harness'
+
+        JENKINS_LOG_DIR     = '02-ci/generated/logs'
+        L5X_FILE            = '02-ci/generated/l5x/BoilerDemo_CI.l5x'
+        ACD_FILE            = '02-ci/generated/acd/BoilerDemo_CI.acd'
+        SOLUTION_FILE       = '02-ci/test-harness/LogixUnitTesting.sln'
+
+        IMPLODE_SCRIPT      = '02-ci/pipeline-scripts/implode-content.ps1'
+        L5X_TO_ACD_SCRIPT   = '02-ci/pipeline-scripts/l5x-to-acd.ps1'
+        RUN_TESTS_SCRIPT    = '02-ci/pipeline-scripts/run-ci-tests.ps1'
+
+        // External tool paths
+        // Replace these with full paths if the tools are not on PATH.
+        L5XPLODE_EXE        = 'C:\\Users\\DevOps\\ra-logix-designer-vcs-custom-tools\\artifacts\\bin\\Release\\l5xplode.exe'
+        L5XGIT_EXE          = 'C:\\Users\\DevOps\\ra-logix-designer-vcs-custom-tools\\artifacts\\bin\\Release\\l5xgit.exe'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Validate Repository Structure') {
+            steps {
+                script {
+                    def requiredNow = [
+                        env.EXPLODED_DIR,
+                        env.HARNESS_DIR,
+                        env.SOLUTION_FILE,
+                        env.RUN_TESTS_SCRIPT,
+                        env.IMPLODE_SCRIPT,
+                        env.L5X_TO_ACD_SCRIPT
+                    ]
+
+                    for (p in requiredNow) {
+                        if (!fileExists(p)) {
+                            error("Missing required path: ${p}")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Prepare Output Folders') {
+            steps {
+                powershell '''
+                    $dirs = @(
+                        "$env:WORKSPACE\\02-ci\\generated\\l5x",
+                        "$env:WORKSPACE\\02-ci\\generated\\acd",
+                        "$env:WORKSPACE\\02-ci\\generated\\logs"
+                    )
+
+                    foreach ($dir in $dirs) {
+                        New-Item -ItemType Directory -Force -Path $dir | Out-Null
+                    }
+                '''
+            }
+        }
+
+        stage('Implode Exploded Content to L5X') {
+            when {
+                expression { params.RUN_LOGIX_BUILD_STAGES }
+            }
+            steps {
+                powershell '''
+                    & "$env:WORKSPACE\\${env.IMPLODE_SCRIPT.replace('/', '\\')}" `
+                        -InputPath "$env:WORKSPACE\\${env.EXPLODED_DIR.replace('/', '\\')}" `
+                        -OutputPath "$env:WORKSPACE\\${env.L5X_FILE.replace('/', '\\')}" `
+                        -ImplodeToolPath "${env.L5XPLODE_EXE}"
+                '''
+            }
+        }
+
+        stage('Convert L5X to ACD') {
+            when {
+                expression { params.RUN_LOGIX_BUILD_STAGES }
+            }
+            steps {
+                powershell '''
+                    & "$env:WORKSPACE\\${env.L5X_TO_ACD_SCRIPT.replace('/', '\\')}" `
+                        -InputPath "$env:WORKSPACE\\${env.L5X_FILE.replace('/', '\\')}" `
+                        -OutputPath "$env:WORKSPACE\\${env.ACD_FILE.replace('/', '\\')}" `
+                        -ConverterToolPath "${env.L5XGIT_EXE}"
+                '''
+            }
+        }
+
+        stage('Run Echo CI Tests') {
+            steps {
+                script {
+                    def requireAcdArg = params.RUN_LOGIX_BUILD_STAGES ? '-RequireAcd' : ''
+
+                    powershell """
+                        & "\$env:WORKSPACE\\${env.RUN_TESTS_SCRIPT.replace('/', '\\')}" `
+                            -AcdPath "\$env:WORKSPACE\\${env.ACD_FILE.replace('/', '\\')}" `
+                            -SolutionPath "\$env:WORKSPACE\\${env.SOLUTION_FILE.replace('/', '\\')}" `
+                            ${requireAcdArg}
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '02-ci/generated/**/*', allowEmptyArchive: true
+        }
+        success {
+            echo 'Pipeline completed.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
