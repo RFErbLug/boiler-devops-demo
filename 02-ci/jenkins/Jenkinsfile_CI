@@ -9,7 +9,7 @@ pipeline {
     parameters {
         booleanParam(
             name: 'RUN_LOGIX_BUILD_STAGES',
-            defaultValue: false,
+            defaultValue: true,
             description: 'Run implode and L5X-to-ACD stages'
         )
     }
