@@ -2391,7 +2391,6 @@ Lines 319, 370-376, 385-389 of C#]]></Comment>
               </Rung>
             </RLLContent>
           </Routine>
-          <Routine Name="test" Type="RLL" />
         </Routines>
       </Program>
     </Programs>
