@@ -10,11 +10,35 @@ namespace UnitTesting_ConsoleApp
     {
         static async Task<int> Main(string[] args)
         {
-            string acdFilePath = @"C:\CI-Pipeline-Files\BoilerDemo.ACD";
-            string chassisName = "DemoChassis";
+            string acdFilePath = args.Length > 0 && !string.IsNullOrWhiteSpace(args[0])
+                ? args[0]
+                : @"C:\CI-Pipeline-Files\BoilerDemo.ACD";
+
+            string chassisName = args.Length > 1 && !string.IsNullOrWhiteSpace(args[1])
+                ? args[1]
+                : "DemoChassis";
+
             bool cleanupOnExit = true;
+            if (args.Length > 2 && !string.IsNullOrWhiteSpace(args[2]))
+            {
+                if (!bool.TryParse(args[2], out cleanupOnExit))
+                {
+                    Console.WriteLine($"WARNING: Could not parse cleanup flag '{args[2]}'. Defaulting to true.");
+                    cleanupOnExit = true;
+                }
+            }
 
             Console.WriteLine("=== BOILER DEMO TEST START ===");
+            Console.WriteLine($"ACD Path       : {acdFilePath}");
+            Console.WriteLine($"Chassis Name   : {chassisName}");
+            Console.WriteLine($"Cleanup On Exit: {cleanupOnExit}");
+
+            if (!File.Exists(acdFilePath))
+            {
+                Console.WriteLine("=== ERROR ===");
+                Console.WriteLine($"ACD file not found: {acdFilePath}");
+                return 1;
+            }
 
             int failureCount = 0;
             LogixProject? logixProject = null;
@@ -185,7 +209,7 @@ namespace UnitTesting_ConsoleApp
 
                 Console.WriteLine("\nTEST 3: Tank1 outlet opens above zero");
                 await logixProject.SetTagValueBOOLAsync(tank1ValveInCmd, LogixProject.OperationMode.Online, false);
-                await logixProject.SetTagValueREALAsync(tank1Level, LogixProject.OperationMode.Online, 10.0f);
+                await logixProject.SetTagValueREALAsync(tank1Level, LogixProject.OperationMode.Online, 100.0f);
                 await logixProject.SetTagValueBOOLAsync(tank1ValveOutCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
                 bool t3 = await logixProject.GetTagValueBOOLAsync(tank1ValveOutStatus, LogixProject.OperationMode.Online);
@@ -217,7 +241,7 @@ namespace UnitTesting_ConsoleApp
 
                 Console.WriteLine("\nTEST 7: Tank2 outlet opens above zero");
                 await logixProject.SetTagValueBOOLAsync(tank2ValveInCmd, LogixProject.OperationMode.Online, false);
-                await logixProject.SetTagValueREALAsync(tank2Level, LogixProject.OperationMode.Online, 10.0f);
+                await logixProject.SetTagValueREALAsync(tank2Level, LogixProject.OperationMode.Online, 100.0f);
                 await logixProject.SetTagValueBOOLAsync(tank2ValveOutCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
                 bool t7 = await logixProject.GetTagValueBOOLAsync(tank2ValveOutStatus, LogixProject.OperationMode.Online);
