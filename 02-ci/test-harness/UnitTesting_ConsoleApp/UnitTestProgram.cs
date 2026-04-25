@@ -389,7 +389,7 @@ namespace UnitTesting_ConsoleApp
             await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, false);
             await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, false);
             await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 0.0f);
-            await logixProject.SetTagValueREALAsync(tank3SetPoint, LogixProject.OperationMode.Online, 50.0f)
+            await logixProject.SetTagValueREALAsync(tank3SetPoint, LogixProject.OperationMode.Online, 50.0f);
 
             await Task.Delay(250);
         }
