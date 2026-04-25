@@ -5,7 +5,7 @@
       <Text><![CDATA[XIC(Tank1_ValveInCmd)LT(Tank1_Level,Tank1_SetPoint)OTE(Tank1_ValveInStatus);]]></Text>
     </Rung>
     <Rung Type="N">
-      <Text><![CDATA[XIC(Tank1_ValveOutCmd)GE(Tank1.Level,1)OTE(Tank1_ValveOutStatus);]]></Text>
+      <Text><![CDATA[XIC(Tank1_ValveOutCmd)GE(Tank1_Level,1)OTE(Tank1_ValveOutStatus);]]></Text>
     </Rung>
     <Rung Type="N">
       <Text><![CDATA[XIC(Tank1_ValveInStatus)ADD(Tank1_Level,1,Tank1_Level);]]></Text>
