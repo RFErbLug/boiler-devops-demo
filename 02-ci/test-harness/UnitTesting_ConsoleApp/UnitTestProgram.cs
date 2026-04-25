@@ -268,7 +268,7 @@ namespace UnitTesting_ConsoleApp
                 await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, false);
                 await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
-                bool t5 = await logixProject.GetTagValueBOOLAsync(tank3ValveInStatus, LogixProject.OperationMode.Online);
+                bool t9 = await logixProject.GetTagValueBOOLAsync(tank3ValveInStatus, LogixProject.OperationMode.Online);
                 failureCount += CompareExpected("Tank3_ValveInStatus", true, t5);
 
                 Console.WriteLine("\nTEST 10: Tank3 inlet blocked at setpoint");
@@ -276,7 +276,7 @@ namespace UnitTesting_ConsoleApp
                 await logixProject.SetTagValueREALAsync(tank3SetPoint, LogixProject.OperationMode.Online, 50.0f);
                 await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
-                bool t6 = await logixProject.GetTagValueBOOLAsync(tank3ValveInStatus, LogixProject.OperationMode.Online);
+                bool t10 = await logixProject.GetTagValueBOOLAsync(tank3ValveInStatus, LogixProject.OperationMode.Online);
                 failureCount += CompareExpected("Tank3_ValveInStatus", false, t6);
 
                 Console.WriteLine("\nTEST 11: Tank3 outlet opens above zero");
@@ -284,14 +284,14 @@ namespace UnitTesting_ConsoleApp
                 await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 100.0f);
                 await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
-                bool t7 = await logixProject.GetTagValueBOOLAsync(tank3ValveOutStatus, LogixProject.OperationMode.Online);
+                bool t11 = await logixProject.GetTagValueBOOLAsync(tank3ValveOutStatus, LogixProject.OperationMode.Online);
                 failureCount += CompareExpected("Tank3_ValveOutStatus", true, t7);
 
                 Console.WriteLine("\nTEST 12: Tank3 outlet blocked at zero");
                 await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 0.0f);
                 await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, true);
                 await Task.Delay(250);
-                bool t8 = await logixProject.GetTagValueBOOLAsync(tank3ValveOutStatus, LogixProject.OperationMode.Online);
+                bool t12 = await logixProject.GetTagValueBOOLAsync(tank3ValveOutStatus, LogixProject.OperationMode.Online);
                 failureCount += CompareExpected("Tank3_ValveOutStatus", false, t8);
 
                 await ResetAllTags(logixProject,
