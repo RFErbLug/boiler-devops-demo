@@ -186,9 +186,17 @@ namespace UnitTesting_ConsoleApp
                 string tank2Level = CreateTagPathFromName("Tank2_Level");
                 string tank2SetPoint = CreateTagPathFromName("Tank2_SetPoint");
 
+                string tank3ValveInStatus = CreateTagPathFromName("Tank3_ValveInStatus");
+                string tank3ValveInCmd = CreateTagPathFromName("Tank3_ValveInCmd");
+                string tank3ValveOutStatus = CreateTagPathFromName("Tank3_ValveOutStatus");
+                string tank3ValveOutCmd = CreateTagPathFromName("Tank3_ValveOutCmd");
+                string tank3Level = CreateTagPathFromName("Tank3_Level");
+                string tank3SetPoint = CreateTagPathFromName("Tank3_SetPoint");
+
                 await ResetAllTags(logixProject,
                     tank1ValveInCmd, tank1ValveOutCmd, tank1Level, tank1SetPoint,
-                    tank2ValveInCmd, tank2ValveOutCmd, tank2Level, tank2SetPoint);
+                    tank2ValveInCmd, tank2ValveOutCmd, tank2Level, tank2SetPoint,
+                    tank3ValveInCmd, tank3ValveOutCmd, tank3Level, tank3SetPoint);
 
                 Console.WriteLine("\nTEST 1: Tank1 inlet opens below setpoint");
                 await logixProject.SetTagValueREALAsync(tank1Level, LogixProject.OperationMode.Online, 0.0f);
@@ -254,9 +262,42 @@ namespace UnitTesting_ConsoleApp
                 bool t8 = await logixProject.GetTagValueBOOLAsync(tank2ValveOutStatus, LogixProject.OperationMode.Online);
                 failureCount += CompareExpected("Tank2_ValveOutStatus", false, t8);
 
+                Console.WriteLine("\nTEST 9: Tank3 inlet opens below setpoint");
+                await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 0.0f);
+                await logixProject.SetTagValueREALAsync(tank3SetPoint, LogixProject.OperationMode.Online, 50.0f);
+                await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, false);
+                await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, true);
+                await Task.Delay(250);
+                bool t5 = await logixProject.GetTagValueBOOLAsync(tank3ValveInStatus, LogixProject.OperationMode.Online);
+                failureCount += CompareExpected("Tank3_ValveInStatus", true, t5);
+
+                Console.WriteLine("\nTEST 10: Tank3 inlet blocked at setpoint");
+                await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 50.0f);
+                await logixProject.SetTagValueREALAsync(tank3SetPoint, LogixProject.OperationMode.Online, 50.0f);
+                await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, true);
+                await Task.Delay(250);
+                bool t6 = await logixProject.GetTagValueBOOLAsync(tank3ValveInStatus, LogixProject.OperationMode.Online);
+                failureCount += CompareExpected("Tank3_ValveInStatus", false, t6);
+
+                Console.WriteLine("\nTEST 11: Tank3 outlet opens above zero");
+                await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, false);
+                await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 100.0f);
+                await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, true);
+                await Task.Delay(250);
+                bool t7 = await logixProject.GetTagValueBOOLAsync(tank3ValveOutStatus, LogixProject.OperationMode.Online);
+                failureCount += CompareExpected("Tank3_ValveOutStatus", true, t7);
+
+                Console.WriteLine("\nTEST 12: Tank3 outlet blocked at zero");
+                await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 0.0f);
+                await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, true);
+                await Task.Delay(250);
+                bool t8 = await logixProject.GetTagValueBOOLAsync(tank3ValveOutStatus, LogixProject.OperationMode.Online);
+                failureCount += CompareExpected("Tank3_ValveOutStatus", false, t8);
+
                 await ResetAllTags(logixProject,
                     tank1ValveInCmd, tank1ValveOutCmd, tank1Level, tank1SetPoint,
-                    tank2ValveInCmd, tank2ValveOutCmd, tank2Level, tank2SetPoint);
+                    tank2ValveInCmd, tank2ValveOutCmd, tank2Level, tank2SetPoint,
+                    tank3ValveInCmd, tank3ValveOutCmd, tank3Level, tank3SetPoint);
 
                 Console.WriteLine("\n=== FINAL RESULT ===");
                 if (failureCount > 0)
@@ -332,6 +373,7 @@ namespace UnitTesting_ConsoleApp
         private static async Task ResetAllTags(
             LogixProject logixProject,
             string tank1ValveInCmd, string tank1ValveOutCmd, string tank1Level, string tank1SetPoint,
+            string tank2ValveInCmd, string tank2ValveOutCmd, string tank2Level, string tank2SetPoint,
             string tank2ValveInCmd, string tank2ValveOutCmd, string tank2Level, string tank2SetPoint)
         {
             await logixProject.SetTagValueBOOLAsync(tank1ValveInCmd, LogixProject.OperationMode.Online, false);
@@ -343,6 +385,11 @@ namespace UnitTesting_ConsoleApp
             await logixProject.SetTagValueBOOLAsync(tank2ValveOutCmd, LogixProject.OperationMode.Online, false);
             await logixProject.SetTagValueREALAsync(tank2Level, LogixProject.OperationMode.Online, 0.0f);
             await logixProject.SetTagValueREALAsync(tank2SetPoint, LogixProject.OperationMode.Online, 50.0f);
+
+            await logixProject.SetTagValueBOOLAsync(tank3ValveInCmd, LogixProject.OperationMode.Online, false);
+            await logixProject.SetTagValueBOOLAsync(tank3ValveOutCmd, LogixProject.OperationMode.Online, false);
+            await logixProject.SetTagValueREALAsync(tank3Level, LogixProject.OperationMode.Online, 0.0f);
+            await logixProject.SetTagValueREALAsync(tank3SetPoint, LogixProject.OperationMode.Online, 50.0f)
 
             await Task.Delay(250);
         }
