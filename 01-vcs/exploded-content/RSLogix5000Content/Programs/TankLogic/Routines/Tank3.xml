@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Routine Name="Tank3" Type="RLL">
+  <RLLContent>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Tank3_ValveInCmd)LT(Tank3_Level,Tank3_SetPoint)OTE(Tank3_ValveInStatus);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Tank3_ValveOutCmd)GE(Tank3_Level,1)OTE(Tank3_ValveOutStatus);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Tank3_ValveInStatus)ADD(Tank3_Level,1,Tank2_Level);]]></Text>
+    </Rung>
+    <Rung Type="N">
+      <Text><![CDATA[XIC(Tank3_ValveOutStatus)SUB(Tank3_Level,1,Tank3_Level);]]></Text>
+    </Rung>
+  </RLLContent>
+</Routine>
