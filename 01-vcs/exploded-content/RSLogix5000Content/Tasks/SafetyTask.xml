@@ -1,6 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Task Name="SafetyTask" Type="PERIODIC" Rate="20" Priority="10" Watchdog="20" DisableUpdateOutputs="false" InhibitTask="false" Class="Safety">
-  <ScheduledPrograms>
-    <ScheduledProgram Name="SafetyProgram" />
-  </ScheduledPrograms>
-</Task>
+<Task Name="SafetyTask" Type="PERIODIC" Rate="20" Priority="10" Watchdog="20" DisableUpdateOutputs="false" InhibitTask="false" Class="Safety" />
