@@ -374,7 +374,7 @@ namespace UnitTesting_ConsoleApp
             LogixProject logixProject,
             string tank1ValveInCmd, string tank1ValveOutCmd, string tank1Level, string tank1SetPoint,
             string tank2ValveInCmd, string tank2ValveOutCmd, string tank2Level, string tank2SetPoint,
-            string tank2ValveInCmd, string tank2ValveOutCmd, string tank2Level, string tank2SetPoint)
+            string tank3ValveInCmd, string tank3ValveOutCmd, string tank3Level, string tank3SetPoint)
         {
             await logixProject.SetTagValueBOOLAsync(tank1ValveInCmd, LogixProject.OperationMode.Online, false);
             await logixProject.SetTagValueBOOLAsync(tank1ValveOutCmd, LogixProject.OperationMode.Online, false);
