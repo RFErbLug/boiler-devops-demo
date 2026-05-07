@@ -2,5 +2,6 @@
 <Task Name="BoilerDemoTask" Type="PERIODIC" Rate="75" Priority="10" Watchdog="500" DisableUpdateOutputs="false" InhibitTask="false" Class="Standard" SynchronizeRedundancyDataDisabled="false">
   <ScheduledPrograms>
     <ScheduledProgram Name="BoilerDemoProgram" />
+    <ScheduledProgram Name="TankLogic" />
   </ScheduledPrograms>
 </Task>
